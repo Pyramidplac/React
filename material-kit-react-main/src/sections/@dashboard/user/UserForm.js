@@ -11,15 +11,6 @@ const TextField = styled(TextValidator)(() => ({
 const UserForm = () => {
   const [state, setState] = useState({ date: new Date() });
 
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-      if (value !== state.password) return false;
-
-      return true;
-    });
-    return () => ValidatorForm.removeValidationRule('isPasswordMatch');
-  }, [state.password]);
-
   const handleSubmit = (event) => {
     console.log(state);
   };
@@ -31,13 +22,16 @@ const UserForm = () => {
 
   const handleDateChange = (date) => setState({ ...state, date });
 
-  const { username, firstName, creditCard, mobile, password, confirmPassword, gender, date, email } = state;
+  const { username, firstName, creditCard, mobile, gender, email } = state;
 
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
         <Grid container spacing={6}>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+            <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
+              Student Details
+            </h4>
             <TextField
               type="text"
               name="username"
@@ -69,16 +63,6 @@ const UserForm = () => {
               errorMessages={['this field is required', 'email is not valid']}
             />
 
-            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                value={date}
-                onChange={handleDateChange}
-                renderInput={(props) => (
-                  <TextField {...props} label="Date picker" id="mui-pickers-date" sx={{ mb: 2, width: '100%' }} />
-                )}
-              />
-            </LocalizationProvider> */}
-
             <TextField
               sx={{ mb: 4 }}
               type="number"
@@ -88,36 +72,6 @@ const UserForm = () => {
               value={creditCard || ''}
               errorMessages={['this field is required']}
               validators={['required', 'minStringLength:16', 'maxStringLength: 16']}
-            />
-          </Grid>
-
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-            <TextField
-              type="text"
-              name="mobile"
-              value={mobile || ''}
-              label="Mobile Nubmer"
-              onChange={handleChange}
-              validators={['required']}
-              errorMessages={['this field is required']}
-            />
-            <TextField
-              name="password"
-              type="password"
-              label="Password"
-              value={password || ''}
-              onChange={handleChange}
-              validators={['required']}
-              errorMessages={['this field is required']}
-            />
-            <TextField
-              type="password"
-              name="confirmPassword"
-              onChange={handleChange}
-              label="Confirm Password"
-              value={confirmPassword || ''}
-              validators={['required', 'isPasswordMatch']}
-              errorMessages={['this field is required', "password didn't match"]}
             />
             <RadioGroup row name="gender" sx={{ mb: 2 }} value={gender || ''} onChange={handleChange}>
               <FormControlLabel value="Male" label="Male" labelPlacement="end" control={<Radio color="secondary" />} />
@@ -136,6 +90,21 @@ const UserForm = () => {
                 control={<Radio color="secondary" />}
               />
             </RadioGroup>
+          </Grid>
+
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+            <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
+              Student Contact Details
+            </h4>
+            <TextField
+              type="text"
+              name="mobile"
+              value={mobile || ''}
+              label="Mobile Nubmer"
+              onChange={handleChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
 
             <FormControlLabel control={<Checkbox />} label="I have read and agree to the terms of service." />
           </Grid>

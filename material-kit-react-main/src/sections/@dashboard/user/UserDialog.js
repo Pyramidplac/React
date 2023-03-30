@@ -28,7 +28,7 @@ export default function UserDialog() {
         onClose={handleClose}
         // fullScreen
         fullWidth
-        maxWidth="xl"
+        maxWidth="lg"
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -39,7 +39,7 @@ export default function UserDialog() {
           <UserForm />
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" color="secondary" onClick={handleClose}>
+          <Button className="btn btn-outline-danger" onClick={handleClose}>
             Cancel
           </Button>
         </DialogActions>

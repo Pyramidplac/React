@@ -10,6 +10,7 @@ import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import FinancialDB from './pages/FinancialDB';
+import Admission from './pages/Admission';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,7 @@ export default function Router() {
         { path: 'app', element: <DashboardAppPage /> },
         { path: 'FinancialDB', element: <FinancialDB /> },
         { path: 'user', element: <UserPage /> },
+        { path: 'admission', element: <Admission /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
