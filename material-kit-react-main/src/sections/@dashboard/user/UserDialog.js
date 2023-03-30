@@ -28,7 +28,7 @@ export default function UserDialog() {
         onClose={handleClose}
         // fullScreen
         fullWidth
-        maxWidth="xl"
+        maxWidth="lg"
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -49,7 +49,6 @@ export default function UserDialog() {
     </div>
   );
 }
-
 
 // import * as React from 'react';
 // import Button from '@mui/material/Button';
