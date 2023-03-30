@@ -19,7 +19,8 @@ export default function BlogPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Blog | Minimal UI </title>
+        {/* <title> Dashboard: Blog | Minimal UI </title> */}
+        <title> Shital Academy Vadodara </title>
       </Helmet>
 
       <Container>
