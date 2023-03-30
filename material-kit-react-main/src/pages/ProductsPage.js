@@ -12,7 +12,8 @@ export default function ProductsPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Products | Minimal UI </title>
+        {/* <title> Dashboard: Products | Minimal UI </title> */}
+        <title> Shital Academy Vadodara </title>
       </Helmet>
 
       <Container>

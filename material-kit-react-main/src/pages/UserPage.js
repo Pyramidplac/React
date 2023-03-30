@@ -150,13 +150,14 @@ export default function UserPage() {
   return (
     <>
       <Helmet>
-        <title> User | Minimal ui </title>
+        {/* <title> Student Info </title> */}
+        <title> Shital Academy Vadodara </title>
       </Helmet>
 
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            User
+            Student/Trainee/Lead Info
           </Typography>
           <UserDialog />
         </Stack>

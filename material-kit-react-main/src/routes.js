@@ -20,10 +20,10 @@ export default function Router() {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'app', element: <DashboardAppPage /> },
-        { path: 'FinancialDB', element: <FinancialDB /> },
-        { path: 'user', element: <UserPage /> },
+        { element: <Navigate to="/dashboard/counsellorDB" />, index: true },
+        { path: 'counsellorDB', element: <DashboardAppPage /> },
+        { path: 'financialDB', element: <FinancialDB /> },
+        { path: 'student', element: <UserPage /> },
         { path: 'admission', element: <Admission /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
@@ -36,7 +36,7 @@ export default function Router() {
     {
       element: <SimpleLayout />,
       children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
+        { element: <Navigate to="/dashboard/counsellorDB" />, index: true },
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],

@@ -7,9 +7,10 @@ const FinancialDB = () => {
   return (
     <>
       <Helmet>
-        <title> Dashboard: FinancialDB | Minimal UI </title>
+        {/* <title> Financial Dashboard </title> */}
+        <title> Shital Academy Vadodara </title>
       </Helmet>
-
+      {/* hello */}
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
           FinancialDB

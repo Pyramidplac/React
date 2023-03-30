@@ -26,7 +26,8 @@ export default function DashboardAppPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard | Minimal UI </title>
+        {/* <title> Counsellor Dashboard </title> */}
+        <title> Shital Academy Vadodara </title>
       </Helmet>
 
       <Container maxWidth="xl">
