@@ -23,7 +23,9 @@ import {
   TablePagination,
 } from '@mui/material';
 // components
-import UserDialog from '../sections/@dashboard/user/UserDialog';
+// import UserDialog from '../sections/@dashboard/user/UserDialog';
+import AdmiDialog from '../sections/@dashboard/Admission/AdmiDialog';
+
 import Label from '../components/label';
 import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
@@ -158,7 +160,7 @@ export default function Admission() {
           <Typography variant="h4" gutterBottom>
             User
           </Typography>
-          <UserDialog />
+          <AdmiDialog />
         </Stack>
 
         <Card>
