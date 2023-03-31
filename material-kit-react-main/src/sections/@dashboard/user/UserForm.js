@@ -14,6 +14,7 @@ const UserForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState('');
+
   useEffect(() => {
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
       if (value !== data.password) return false;
@@ -34,6 +35,7 @@ const UserForm = () => {
     // --------------------------API----------------------------
     axios.post('', data).then((r) => {
       console.log(r.data);
+      localStorage.setItem('EnquiryData', JSON.stringify(r.data));
       toast('Registration successfully..');
     });
   };
@@ -88,10 +90,10 @@ const UserForm = () => {
               errorMessages={['this field is required']}
             />
             <TextField
-              type="text"
+              type="date"
               name="birthdate"
-              value={birthdate || ''}
               label="Birth Date"
+              value={birthdate || ''}
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
@@ -221,8 +223,8 @@ const UserForm = () => {
             <TextField
               label="Lead Source "
               select
-              value={leadsource || ''}
               variant="filled"
+              value={leadsource || ''}
               helperText="Please Select your city"
               onChange={handleChange}
               name="leadsource"
@@ -239,6 +241,16 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
+
+            <TextField
+              type="date"
+              name="enquirydate"
+              label="Enquiry Date"
+              value={enquirydate || ''}
+              onChange={handleChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
           </Grid>
         </Grid>
 
