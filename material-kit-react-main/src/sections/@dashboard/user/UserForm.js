@@ -35,7 +35,6 @@ const UserForm = () => {
     // --------------------------API----------------------------
     axios.post('', data).then((r) => {
       console.log(r.data);
-      localStorage.setItem('EnquiryData', JSON.stringify(r.data));
       toast('Registration successfully..');
     });
   };
@@ -223,8 +222,8 @@ const UserForm = () => {
             <TextField
               label="Lead Source "
               select
-              variant="filled"
               value={leadsource || ''}
+              variant="filled"
               helperText="Please Select your city"
               onChange={handleChange}
               name="leadsource"
@@ -241,16 +240,6 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
-
-            <TextField
-              type="date"
-              name="enquirydate"
-              label="Enquiry Date"
-              value={enquirydate || ''}
-              onChange={handleChange}
-              validators={['required']}
-              errorMessages={['this field is required']}
-            />
           </Grid>
         </Grid>
 
