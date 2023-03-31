@@ -217,8 +217,9 @@ const UserForm = () => {
               name='takenby'
               SelectProps={{
                 native: 'true'
-              }}>
-              {/* <option>Taken By</option> */}
+              }}
+              value={takenby || ''}>
+              <option />
               <option>Counsellor Vadodara</option>
               <option>Counsellor Aanand</option>
               <option>Counsellor Ahmedabad</option>
@@ -229,12 +230,14 @@ const UserForm = () => {
               label='Lead Source '
               select
               variant='filled'
+              value={leadsource || ''}
               helperText='Please Select your city'
               onChange={handleChange}
               name='leadsource'
               SelectProps={{
                 native: 'true'
               }}>
+              <option />
               <option>Discount Coupon</option>
               <option>Facebook</option>
               <option>Google</option>

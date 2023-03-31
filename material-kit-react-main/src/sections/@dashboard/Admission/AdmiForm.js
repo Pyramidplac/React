@@ -2,6 +2,8 @@ import { Button, Checkbox, FormControlLabel, Grid, Icon, Radio, RadioGroup, styl
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const TextField = styled(TextValidator)(() => ({
   width: '100%',
@@ -9,71 +11,68 @@ const TextField = styled(TextValidator)(() => ({
 }));
 
 const AdmiForm = () => {
-  const [state, setState] = useState({ date: new Date() });
+  // const [state, setState] = useState({ date: new Date() });
 
-  const handleSubmit = (event) => {
-    console.log(state);
+  const [data, setdata] = useState("");
+  useEffect(() => {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+      if (value !== data.password) return false;
+
+      return true;
+    });
+    return () => ValidatorForm.removeValidationRule('isPasswordMatch');
+  }, [data.password]);
+
+
+  const handleChange = (e) => {
+    e.persist();
+    setdata({ ...data, [e.target.name]: e.target.value })
   };
 
-  const handleChange = (event) => {
-    event.persist();
-    setState({ ...state, [event.target.name]: event.target.value });
+  const handleSubmit = (e) => {
+    console.log(data);
+    e.preventDefault()
+    // --------------------------API----------------------------
+    axios.post("", data)
+      .then(r => {
+        console.log(r.data);
+        toast("Registration successfully..")
+      })
   };
 
-  const handleDateChange = (date) => setState({ ...state, date });
+  // const handleDateChange = (date) => setState({ ...state, date });
 
-  const { username, firstName, creditCard, mobile, gender, email } = state;
+  const { name } = data;
+
+
+
+
 
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
-        <Grid container spacing={6}>
+        <Grid container spacing={8}>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-            <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
-              Student Details
-            </h4>
             <TextField
               type="text"
-              name="username"
+              name="name"
               id="standard-basic"
-              value={username || ''}
+              value={name || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
-              label="Username (Min length 4, Max length 9)"
-              validators={['required', 'minStringLength: 4', 'maxStringLength: 9']}
-            />
-
-            <TextField
-              type="text"
-              name="firstName"
-              label="First Name"
-              onChange={handleChange}
-              value={firstName || ''}
+              label="Student Name "
               validators={['required']}
-              errorMessages={['this field is required']}
             />
 
-            <TextField
-              type="email"
-              name="email"
-              label="Email"
-              value={email || ''}
-              onChange={handleChange}
-              validators={['required', 'isEmail']}
-              errorMessages={['this field is required', 'email is not valid']}
-            />
 
-            <TextField
-              sx={{ mb: 4 }}
-              type="number"
-              name="creditCard"
-              label="Credit Card"
-              onChange={handleChange}
-              value={creditCard || ''}
-              errorMessages={['this field is required']}
-              validators={['required', 'minStringLength:16', 'maxStringLength: 16']}
-            />
-            <RadioGroup row name="gender" sx={{ mb: 2 }} value={gender || ''} onChange={handleChange}>
+
+          </Grid>
+          {/* --------------------------------------------------------------------------------- */}
+
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+
+
+            {/* <RadioGroup row name="gender" sx={{ mb: 2 }} value={gender || ''} onChange={handleChange}>
               <FormControlLabel value="Male" label="Male" labelPlacement="end" control={<Radio color="secondary" />} />
 
               <FormControlLabel
@@ -89,22 +88,22 @@ const AdmiForm = () => {
                 labelPlacement="end"
                 control={<Radio color="secondary" />}
               />
-            </RadioGroup>
-          </Grid>
+            </RadioGroup> */}
 
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-            <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
-              Student Contact Details
-            </h4>
-            <TextField
+
+            {/* <TextField
               type="text"
-              name="mobile"
-              value={mobile || ''}
-              label="Mobile Nubmer"
+              name="whatsapp"
+              value={whatsapp || ''}
+              label="Whatsapp Nubmer"
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
-            />
+            /> */}
+
+
+
+
 
             <FormControlLabel control={<Checkbox />} label="I have read and agree to the terms of service." />
           </Grid>
