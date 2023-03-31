@@ -250,17 +250,6 @@ const UserForm = () => {
             />
 
             <TextField
-              name="enquirydate"
-              label="Enquiry Date"
-              InputLabelProps={{ shrink: true }}
-              type="date"
-              value={enquirydate || ''}
-              onChange={handleChange}
-              validators={['required']}
-              errorMessages={['this field is required']}
-            />
-
-            <TextField
               label="Taken By"
               select
               variant="filled"
