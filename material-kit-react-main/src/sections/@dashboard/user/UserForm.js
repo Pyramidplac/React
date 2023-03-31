@@ -34,6 +34,7 @@ const UserForm = () => {
     // --------------------------API----------------------------
     axios.post('', data).then((r) => {
       console.log(r.data);
+      localStorage.setItem("EnquiryData", JSON.stringify(r.data))
       toast('Registration successfully..');
     });
   };
@@ -88,10 +89,10 @@ const UserForm = () => {
               errorMessages={['this field is required']}
             />
             <TextField
-              type="text"
+              type="date"
               name="birthdate"
-              value={birthdate || ''}
               label="Birth Date"
+              value={birthdate || ''}
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
@@ -210,7 +211,7 @@ const UserForm = () => {
               SelectProps={{
                 native: 'true'
               }}>
-              {/* <option>Taken By</option> */}
+              <option />
               <option>Counsellor Vadodara</option>
               <option>Counsellor Aanand</option>
               <option>Counsellor Ahmedabad</option>
@@ -221,12 +222,14 @@ const UserForm = () => {
               label="Lead Source "
               select
               variant='filled'
+              value={leadsource || ''}
               helperText='Please Select your city'
               onChange={handleChange}
               name="leadsource"
               SelectProps={{
                 native: 'true'
               }}>
+              <option />
               <option>Discount Coupon</option>
               <option>Facebook</option>
               <option>Google</option>
@@ -235,6 +238,17 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
+
+            <TextField
+              type="date"
+              name="enquirydate"
+              label="Enquiry Date"
+              value={enquirydate || ''}
+              onChange={handleChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
+
           </Grid>
         </Grid>
 
