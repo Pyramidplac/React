@@ -13,7 +13,7 @@ const TextField = styled(TextValidator)(() => ({
 const UserForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
-  const [data, setdata] = useState("");
+  const [data, setdata] = useState('');
   useEffect(() => {
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
       if (value !== data.password) return false;
@@ -23,26 +23,25 @@ const UserForm = () => {
     return () => ValidatorForm.removeValidationRule('isPasswordMatch');
   }, [data.password]);
 
-
   const handleChange = (e) => {
     e.persist();
-    setdata({ ...data, [e.target.name]: e.target.value })
+    setdata({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     console.log(data);
-    e.preventDefault()
+    e.preventDefault();
     // --------------------------API----------------------------
-    axios.post("", data)
-      .then(r => {
-        console.log(r.data);
-        toast("Registration successfully..")
-      })
+    axios.post('', data).then((r) => {
+      console.log(r.data);
+      toast('Registration successfully..');
+    });
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });
 
-  const { name,
+  const {
+    name,
     parentsname,
     studentmobile,
     parentmobile,
@@ -57,17 +56,17 @@ const UserForm = () => {
     takenby,
     course,
     fees,
-    leadsource } = data;
-
-
-
-
+    leadsource,
+  } = data;
 
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
         <Grid container spacing={8}>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+            <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
+              Student Details
+            </h4>
             <TextField
               type="text"
               name="name"
@@ -88,7 +87,48 @@ const UserForm = () => {
               validators={['required']}
               errorMessages={['this field is required']}
             />
+            <TextField
+              type="text"
+              name="birthdate"
+              value={birthdate || ''}
+              label="Birth Date"
+              onChange={handleChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
+            <TextField
+              type="text"
+              name="education"
+              value={education || ''}
+              label="Education"
+              onChange={handleChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
+            <RadioGroup row name="gender" sx={{ mb: 2 }} value={gender || ''} onChange={handleChange}>
+              <FormControlLabel value="Male" label="Male" labelPlacement="end" control={<Radio color="secondary" />} />
 
+              <FormControlLabel
+                value="Female"
+                label="Female"
+                labelPlacement="end"
+                control={<Radio color="secondary" />}
+              />
+
+              <FormControlLabel
+                value="Others"
+                label="Others"
+                labelPlacement="end"
+                control={<Radio color="secondary" />}
+              />
+            </RadioGroup>
+          </Grid>
+          {/* ================================================================================== */}
+
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+            <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
+              Student Contact Details
+            </h4>
             <TextField
               type="email"
               name="email"
@@ -98,16 +138,6 @@ const UserForm = () => {
               validators={['required', 'isEmail']}
               errorMessages={['this field is required', 'email is not valid']}
             />
-
-            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                value={date}
-                onChange={handleDateChange}
-                renderInput={(props) => (
-                  <TextField {...props} label="Date picker" id="mui-pickers-date" sx={{ mb: 2, width: '100%' }} />
-                )}
-              />
-            </LocalizationProvider> */}
 
             <TextField
               type="text"
@@ -127,56 +157,11 @@ const UserForm = () => {
               validators={['required']}
               errorMessages={['this field is required']}
             />
-
-            <TextField
-              type="text"
-              name="birthdate"
-              value={birthdate || ''}
-              label="Birth Date"
-              onChange={handleChange}
-              validators={['required']}
-              errorMessages={['this field is required']}
-            />
-
-          </Grid>
-          {/* --------------------------------------------------------------------------------- */}
-
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-
-
-            <RadioGroup row name="gender" sx={{ mb: 2 }} value={gender || ''} onChange={handleChange}>
-              <FormControlLabel value="Male" label="Male" labelPlacement="end" control={<Radio color="secondary" />} />
-
-              <FormControlLabel
-                value="Female"
-                label="Female"
-                labelPlacement="end"
-                control={<Radio color="secondary" />}
-              />
-
-              <FormControlLabel
-                value="Others"
-                label="Others"
-                labelPlacement="end"
-                control={<Radio color="secondary" />}
-              />
-            </RadioGroup>
-
-
             <TextField
               type="text"
               name="whatsapp"
               value={whatsapp || ''}
               label="Whatsapp Nubmer"
-              onChange={handleChange}
-              validators={['required']}
-              errorMessages={['this field is required']}
-            />
-            <TextField
-              type="text"
-              name="education"
-              value={education || ''}
-              label="Education"
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
@@ -204,22 +189,28 @@ const UserForm = () => {
               errorMessages={['this field is required']}
             />
 
+            {/* <FormControlLabel control={<Checkbox />} label="I have read and agree to the terms of service." /> */}
+          </Grid>
 
-            {/* ==================================================================================== */}
+          {/* ================================================================================== */}
 
-            {/* ====================ENQUIRY date=================== */}
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+            <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
+              Enquiry Details
+            </h4>
+
             <TextField
-              label='Taken By'
+              label="Taken By"
               select
-              variant='filled'
-              helperText='Please Select your city'
+              variant="filled"
+              value={takenby || ''}
+              helperText="Please Select your city"
               onChange={handleChange}
-              name='takenby'
+              name="takenby"
               SelectProps={{
                 native: 'true'
-              }}
-              value={takenby || ''}>
-              <option />
+              }}>
+              {/* <option>Taken By</option> */}
               <option>Counsellor Vadodara</option>
               <option>Counsellor Aanand</option>
               <option>Counsellor Ahmedabad</option>
@@ -227,17 +218,15 @@ const UserForm = () => {
             </TextField>
 
             <TextField
-              label='Lead Source '
+              label="Lead Source "
               select
               variant='filled'
-              value={leadsource || ''}
               helperText='Please Select your city'
               onChange={handleChange}
-              name='leadsource'
+              name="leadsource"
               SelectProps={{
                 native: 'true'
               }}>
-              <option />
               <option>Discount Coupon</option>
               <option>Facebook</option>
               <option>Google</option>
@@ -246,8 +235,6 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
-
-            <FormControlLabel control={<Checkbox />} label="I have read and agree to the terms of service." />
           </Grid>
         </Grid>
 
