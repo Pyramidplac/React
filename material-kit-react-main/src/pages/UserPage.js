@@ -1,7 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
+import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
+
 // import dataFetch from 'src/sections/@dashboard/CUSTOMAPI/Custom';
 // @mui
 import {
@@ -25,6 +29,7 @@ import {
 } from '@mui/material';
 // components
 
+import axios from 'axios';
 import UserDialog from '../sections/@dashboard/user/UserDialog';
 import Label from '../components/label';
 import Iconify from '../components/iconify';
@@ -37,15 +42,7 @@ import USERLIST from '../_mock/user'
 
 // ----------------------------------------------------------------------
 
-const TABLE_HEAD = [
-  { id: 'enquirydate', label: 'ENQUIRY DATE', alignRight: false },
-  { id: 'name', label: 'NAME', alignRight: false },
-  { id: 'studentmobile', label: 'MOBILE', alignRight: false },
-  { id: 'takenby', label: 'ENQUIRY TAKEN BY', alignRight: false },
-  { id: 'leadsource', label: 'LEAD SOURCE', alignRight: false },
-];
 
-// ----------------------------------------------------------------------
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -145,23 +142,57 @@ export default function UserPage() {
   };
 
 
-  // const Fetcdata = (y) => {
-
-  //   dataFetch.get("http://localhost:4000/accounts")
-  //     .then(r => {
-  //       setrow(r.data);
-  //     }).catch(
-  //       y => {
-  //         console.log(y);
-  //       }
-  //     )
-  // }
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
 
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && !!filterName;
+
+  // ==============================================================================================================================
+  // ==============================================================================================================================
+  // const [column, setcolumn] = useState([
+  //   { field: "name", filter: "agNumberColumnFilter" },
+  //   { field: "studentmobile", filter: true },
+  //   { field: "email", filter: true },
+  //   { field: "gender", filter: true },
+  //   { field: "whatsapp", filter: true, sortable: true },
+  //   { field: "education", filter: true },
+  //   { field: "city", filter: true },
+  //   { field: "enquirydate", filter: true },
+  //   { field: "takenby", filter: true },
+  //   { field: "course", filter: true },
+  //   { field: "leadsource", filter: true },
+  // ]);
+  const [column, setcolumn] = useState([
+    { field: "id", filter: "agNumberColumnFilter" },
+    { field: "title", filter: true },
+
+
+  ]);
+  const [row, setrow] = useState([]);
+
+
+
+  // ==================Token===========================
+  // useEffect(() => {
+  //   const data = localStorage.getItem("EMSdata")
+  //   const p = JSON.parse(data)
+  //   axios.get("http://localhost:4000/accounts", {
+  //     headers: {
+  //       "Authorization": 'Bearer' + p?.jwtToken
+  //     }
+  //   }).then(
+  //     e => {
+  //       setrow(e.data)
+  //       console.log(e.data);
+  //     }
+  //   ).catch(
+  //     y => {
+  //       console.log(y);
+  //     }
+  //   )
+  // }, []);
 
   return (
     <>
@@ -179,9 +210,9 @@ export default function UserPage() {
         </Stack>
 
         <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+          {/* <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} /> */}
 
-          <Scrollbar>
+          {/* <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
                 <UserListHead
@@ -201,22 +232,31 @@ export default function UserPage() {
                     return (
                       <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
                         <TableCell padding="checkbox">
-                          { }
+                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, name)} />
                         </TableCell>
 
-                        <TableCell align="left">{ }</TableCell>
+                        <TableCell component="th" scope="row" padding="none">
+                          <Stack direction="row" alignItems="center" spacing={2}>
+                            <Avatar alt={name} src={avatarUrl} />
+                            <Typography variant="subtitle2" noWrap>
+                              {name}
+                            </Typography>
+                          </Stack>
+                        </TableCell>
 
-                        <TableCell align="left">{ }</TableCell>
+                        <TableCell align="left">{company}</TableCell>
 
-                        <TableCell align="left">{ }</TableCell>
+                        <TableCell align="left">{role}</TableCell>
 
-                        <TableCell align="left">{ }
-                          {/* <Label color={(status === 'banned' && 'error') || 'success'}>{sentenceCase(status)}</Label> */}
+                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
+
+                        <TableCell align="left">
+                          <Label color={(status === 'banned' && 'error') || 'success'}>{sentenceCase(status)}</Label>
                         </TableCell>
 
                         <TableCell align="right">
                           <IconButton size="large" color="inherit" onClick={handleOpenMenu}>
-                            { }
+                            <Iconify icon={'eva:more-vertical-fill'} />
                           </IconButton>
                         </TableCell>
                       </TableRow>
@@ -254,9 +294,9 @@ export default function UserPage() {
                 )}
               </Table>
             </TableContainer>
-          </Scrollbar>
+          </Scrollbar> */}
 
-          <TablePagination
+          {/* <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
             count={USERLIST.length}
@@ -264,7 +304,14 @@ export default function UserPage() {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          /> */}
+
+          {/* <button onClick={Fetcdata} className='form-control btn btn-outline-danger'>Fetch Data</button> */}
+
+
+          <div className="ag-theme-alpine" style={{ width: "100 %", height: 600 }}>
+            <AgGridReact rowData={row} columnDefs={column} />
+          </div>
         </Card>
       </Container>
 
@@ -299,4 +346,3 @@ export default function UserPage() {
     </>
   );
 }
-
