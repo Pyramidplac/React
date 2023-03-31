@@ -89,12 +89,12 @@ const UserForm = () => {
               errorMessages={['this field is required']}
             />
             <TextField
-              type="date"
               name="birthdate"
               label="Birth Date"
+              InputLabelProps={{ shrink: true }}
+              type="date"
               value={birthdate || ''}
               onChange={handleChange}
-              validators={['required']}
               errorMessages={['this field is required']}
             />
             <TextField
@@ -199,6 +199,16 @@ const UserForm = () => {
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
               Enquiry Details
             </h4>
+            <TextField
+              name="enquirydate"
+              label="Enquiry Date"
+              InputLabelProps={{ shrink: true }}
+              type="date"
+              value={enquirydate || ''}
+              onChange={handleChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
 
             <TextField
               label="Taken By"
@@ -240,21 +250,6 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
-<<<<<<< HEAD
-=======
-
-
-            <TextField
-              type="date"
-              name="enquirydate"
-              label="Enquiry Date"
-              value={enquirydate || ''}
-              onChange={handleChange}
-              validators={['required']}
-              errorMessages={['this field is required']}
-            />
-
->>>>>>> 737b86ae6eb888aa42261123544a9c249cdcd930
           </Grid>
         </Grid>
 

@@ -32,8 +32,8 @@ import Scrollbar from '../components/scrollbar';
 
 // sections
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
-// mock 
-import USERLIST from '../_mock/user'
+// mock
+import USERLIST from '../_mock/user';
 
 // ----------------------------------------------------------------------
 
@@ -56,7 +56,6 @@ function descendingComparator(a, b, orderBy) {
   }
   return 0;
 }
-
 
 function getComparator(order, orderBy) {
   return order === 'desc'
@@ -144,7 +143,6 @@ export default function UserPage() {
     setFilterName(event.target.value);
   };
 
-
   // const Fetcdata = (y) => {
 
   //   dataFetch.get("http://localhost:4000/accounts")
@@ -201,22 +199,31 @@ export default function UserPage() {
                     return (
                       <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
                         <TableCell padding="checkbox">
-                          { }
+                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, name)} />
                         </TableCell>
 
-                        <TableCell align="left">{ }</TableCell>
+                        <TableCell component="th" scope="row" padding="none">
+                          <Stack direction="row" alignItems="center" spacing={2}>
+                            <Avatar alt={name} src={avatarUrl} />
+                            <Typography variant="subtitle2" noWrap>
+                              {name}
+                            </Typography>
+                          </Stack>
+                        </TableCell>
 
-                        <TableCell align="left">{ }</TableCell>
+                        <TableCell align="left">{company}</TableCell>
 
-                        <TableCell align="left">{ }</TableCell>
+                        <TableCell align="left">{role}</TableCell>
 
-                        <TableCell align="left">{ }
-                          {/* <Label color={(status === 'banned' && 'error') || 'success'}>{sentenceCase(status)}</Label> */}
+                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
+
+                        <TableCell align="left">
+                          <Label color={(status === 'banned' && 'error') || 'success'}>{sentenceCase(status)}</Label>
                         </TableCell>
 
                         <TableCell align="right">
                           <IconButton size="large" color="inherit" onClick={handleOpenMenu}>
-                            { }
+                            <Iconify icon={'eva:more-vertical-fill'} />
                           </IconButton>
                         </TableCell>
                       </TableRow>
@@ -299,4 +306,3 @@ export default function UserPage() {
     </>
   );
 }
-
