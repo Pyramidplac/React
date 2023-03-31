@@ -1,14 +1,53 @@
-import { Button, Checkbox, FormControlLabel, Grid, Icon, Radio, RadioGroup, styled } from '@mui/material';
+import {
+  Autocomplete,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Icon,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  styled,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import CheckIcon from '@mui/icons-material/Check';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const TextField = styled(TextValidator)(() => ({
   width: '100%',
   marginBottom: '16px',
 }));
+
+const Coure = [
+  'Basic Grammar-5000',
+  'CCC-4000',
+  'CCC With Advance Tally-12500',
+  'Data Science (Python and ML)-35000',
+  'Full Stack Development-31000',
+  'Full Stack Development (MERN)-40000',
+  'IELTS-10000',
+  'IELTS Advance-17000',
+  'Programming C & C++-10000',
+  'Programming in C-5000',
+  'Programming in C++-5000',
+  'Python-10000',
+  'Smart Pro. NET-25000',
+  'Spoken-5000',
+  'Spoken English-10000',
+  'Spoken English (8500) -8500',
+  'Spoken English (9000)-9000',
+  'Spoken+CCC-14000',
+  'Spoken+CCC+ Tally-20500',
+  'Spoken+ Tally-16500',
+  'Tally ERP 9-6500',
+  'Tally Prime-9000',
+  'Tally+CCC-10500',
+];
 
 const UserForm = () => {
   // const [state, setState] = useState({ date: new Date() });
@@ -55,7 +94,7 @@ const UserForm = () => {
     city,
     enquirydate,
     takenby,
-    course,
+    course = [],
     fees,
     leadsource,
   } = data;
@@ -211,11 +250,22 @@ const UserForm = () => {
             />
 
             <TextField
+              name="enquirydate"
+              label="Enquiry Date"
+              InputLabelProps={{ shrink: true }}
+              type="date"
+              value={enquirydate || ''}
+              onChange={handleChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
+
+            <TextField
               label="Taken By"
               select
               variant="filled"
               value={takenby || ''}
-              helperText="Please Select your city"
+              helperText="Please Select your taken BY"
               onChange={handleChange}
               name="takenby"
               SelectProps={{
@@ -234,7 +284,7 @@ const UserForm = () => {
               select
               value={leadsource || ''}
               variant="filled"
-              helperText="Please Select your city"
+              helperText="Please Select your lead source"
               onChange={handleChange}
               name="leadsource"
               SelectProps={{
@@ -250,6 +300,25 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
+
+            <Autocomplete
+              label="Select Course"
+              placeholder="Favorites"
+              name="course"
+              value={course || ''}
+              multiple
+              id="tags-standard"
+              options={Coure}
+              getOptionLabel={(option) => option}
+              disableCloseOnSelect
+              renderOption={(props, option, { selected }) => (
+                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
+                  {option}
+                  {selected ? <CheckIcon color="info" /> : null}
+                </MenuItem>
+              )}
+              renderInput={(params) => <TextField {...params} variant="outlined" />}
+            />
           </Grid>
         </Grid>
 
