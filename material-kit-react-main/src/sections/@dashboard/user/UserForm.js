@@ -240,6 +240,21 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
+<<<<<<< HEAD
+=======
+
+
+            <TextField
+              type="date"
+              name="enquirydate"
+              label="Enquiry Date"
+              value={enquirydate || ''}
+              onChange={handleChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
+
+>>>>>>> 737b86ae6eb888aa42261123544a9c249cdcd930
           </Grid>
         </Grid>
 
