@@ -23,7 +23,7 @@ const TextField = styled(TextValidator)(() => ({
   marginBottom: '16px',
 }));
 
-const Coure = [
+const Course = [
   'Basic Grammar-5000',
   'CCC-4000',
   'CCC With Advance Tally-12500',
@@ -291,22 +291,33 @@ const UserForm = () => {
             </TextField>
 
             <Autocomplete
-              label="Select Course"
-              placeholder="Favorites"
-              name="course"
-              value={course || ''}
               multiple
               id="tags-standard"
-              options={Coure}
+              options={Course}
               getOptionLabel={(option) => option}
+
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => (
-                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
+                <MenuItem
+                  key={option}
+                  value={option}
+                  sx={{ justifyContent: "space-between" }}
+                  {...props}
+                >
                   {option}
                   {selected ? <CheckIcon color="info" /> : null}
                 </MenuItem>
               )}
-              renderInput={(params) => <TextField {...params} variant="outlined" />}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  value={course || ''}
+                  variant="outlined"
+                  label="Select Course"
+                  placeholder="Select Course"
+                  name='course'
+                />
+              )}
             />
           </Grid>
         </Grid>

@@ -41,6 +41,15 @@ import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
 import USERLIST from '../_mock/user';
 
 // ----------------------------------------------------------------------
+const TABLE_HEAD = [
+  { id: 'name', label: 'Name', alignRight: false },
+  { id: 'company', label: 'Company', alignRight: false },
+  { id: 'role', label: 'Role', alignRight: false },
+  { id: 'isVerified', label: 'Verified', alignRight: false },
+  { id: 'status', label: 'Status', alignRight: false },
+  { id: '' },
+];
+// ----------------------------------------------------------------------
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -201,9 +210,9 @@ export default function UserPage() {
         </Stack>
 
         <Card>
-          {/* <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} /> */}
+          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
-          {/* <Scrollbar>
+          <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
                 <UserListHead
@@ -285,9 +294,9 @@ export default function UserPage() {
                 )}
               </Table>
             </TableContainer>
-          </Scrollbar> */}
+          </Scrollbar>
 
-          {/* <TablePagination
+          <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
             count={USERLIST.length}
@@ -295,13 +304,7 @@ export default function UserPage() {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          /> */}
-
-          {/* <button onClick={Fetcdata} className='form-control btn btn-outline-danger'>Fetch Data</button> */}
-
-          <div className="ag-theme-alpine" style={{ width: '100 %', height: 600 }}>
-            <AgGridReact rowData={row} columnDefs={column} />
-          </div>
+          />
         </Card>
       </Container>
 
