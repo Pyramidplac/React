@@ -23,7 +23,7 @@ const TextField = styled(TextValidator)(() => ({
   marginBottom: '16px',
 }));
 
-const Coure = [
+const Course = [
   'Basic Grammar-5000',
   'CCC-4000',
   'CCC With Advance Tally-12500',
@@ -65,7 +65,22 @@ const UserForm = () => {
 
   const handleChange = (e) => {
     e.persist();
-    setdata({ ...data, [e.target.name]: e.target.value });
+    // setdata({ ...data, [e.target.name]: e.target.value });
+    if (e.target.name === 'course') {
+      const mydata = data.hobbies;
+
+      if (e.target.checked) {
+        mydata.push(e.target.value);
+        setdata({ ...data, hobbies: mydata });
+      } else {
+        const mydata1 = mydata.filter((val) => {
+          return val !== e.target.value;
+        });
+        setdata({ ...data, hobbies: mydata1 });
+      }
+    } else {
+      setdata({ ...data, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -95,7 +110,6 @@ const UserForm = () => {
     enquirydate,
     takenby,
     course = [],
-    fees,
     leadsource,
   } = data;
 
@@ -291,13 +305,9 @@ const UserForm = () => {
             </TextField>
 
             <Autocomplete
-              label="Select Course"
-              placeholder="Favorites"
-              name="course"
-              value={course || ''}
               multiple
               id="tags-standard"
-              options={Coure}
+              options={Course}
               getOptionLabel={(option) => option}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => (
@@ -306,7 +316,16 @@ const UserForm = () => {
                   {selected ? <CheckIcon color="info" /> : null}
                 </MenuItem>
               )}
-              renderInput={(params) => <TextField {...params} variant="outlined" />}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  value={course || ''}
+                  variant="outlined"
+                  label="Select Course"
+                  placeholder="Select Course"
+                  name="course"
+                />
+              )}
             />
           </Grid>
         </Grid>
