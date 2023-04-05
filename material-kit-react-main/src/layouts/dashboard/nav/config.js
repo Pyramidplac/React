@@ -26,6 +26,13 @@ const navConfig = [
     path: '/dashboard/admission',
     icon: icon('ic_user'),
   },
+  // -------------------------------------------------------
+  {
+    title: 'Master',
+    path: '/dashboard/master',
+    icon: icon('ic_user'),
+  },
+  // -------------------------------------------------------
   {
     title: 'question',
     path: '/dashboard/question',

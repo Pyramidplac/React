@@ -95,7 +95,6 @@ const UserForm = () => {
     enquirydate,
     takenby,
     course = [],
-    fees,
     leadsource,
   } = data;
 

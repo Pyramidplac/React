@@ -42,12 +42,16 @@ import USERLIST from '../_mock/user';
 
 // ----------------------------------------------------------------------
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
-  { id: '' },
+  { id: "name", label: "name" },
+  { id: "studentmobile", label: "studentmobile", alignRight: false },
+  { id: "email", label: "email", alignRight: false },
+  { id: "whatsapp", label: "whatsapp", alignRight: false },
+  { id: "education", label: "education", alignRight: false },
+  { id: "city", label: "city", alignRight: false },
+  { id: "enquirydate", label: "enquirydate", alignRight: false },
+  { id: "takenby", label: "takenby", alignRight: false },
+  { id: "course", label: "course", alignRight: false },
+  { id: "leadsource", label: "leadsource", alignRight: false },
 ];
 // ----------------------------------------------------------------------
 
@@ -153,26 +157,7 @@ export default function UserPage() {
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
-  // ==============================================================================================================================
-  // ==============================================================================================================================
-  // const [column, setcolumn] = useState([
-  //   { field: "name", filter: "agNumberColumnFilter" },
-  //   { field: "studentmobile", filter: true },
-  //   { field: "email", filter: true },
-  //   { field: "gender", filter: true },
-  //   { field: "whatsapp", filter: true, sortable: true },
-  //   { field: "education", filter: true },
-  //   { field: "city", filter: true },
-  //   { field: "enquirydate", filter: true },
-  //   { field: "takenby", filter: true },
-  //   { field: "course", filter: true },
-  //   { field: "leadsource", filter: true },
-  // ]);
-  const [column, setcolumn] = useState([
-    { field: 'id', filter: 'agNumberColumnFilter' },
-    { field: 'title', filter: true },
-  ]);
-  const [row, setrow] = useState([]);
+
 
   // ==================Token===========================
   // useEffect(() => {
