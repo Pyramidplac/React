@@ -12,6 +12,10 @@ import DashboardAppPage from './pages/DashboardAppPage';
 import FinancialDB from './pages/FinancialDB';
 import Admission from './pages/Admission';
 import Questionpage from './pages/Questionpage';
+import Master from './pages/Master';
+import Subject from './pages/Subject';
+import FeesPackage from './pages/FeesPackage';
+import Course from './pages/Course';
 
 // ----------------------------------------------------------------------
 
@@ -26,15 +30,30 @@ export default function Router() {
         { path: 'financialDB', element: <FinancialDB /> },
         { path: 'student', element: <UserPage /> },
         { path: 'admission', element: <Admission /> },
+        { path: 'master', element: <Master /> },
         { path: 'question', element: <Questionpage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
     },
+
     {
       path: 'login',
       element: <LoginPage />,
     },
+    // ----------------------------------------------
+
+    {
+      path: 'subject',
+      element: <Subject />,
+    }, {
+      path: 'course',
+      element: <Course />,
+    }, {
+      path: 'fees',
+      element: <FeesPackage />,
+    },
+    // ----------------------------------------------
     {
       element: <SimpleLayout />,
       children: [
