@@ -14,14 +14,6 @@ const FeesForm = () => {
     // const [state, setState] = useState({ date: new Date() });
 
     const [data, setdata] = useState("");
-    useEffect(() => {
-        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-            if (value !== data.password) return false;
-
-            return true;
-        });
-        return () => ValidatorForm.removeValidationRule('isPasswordMatch');
-    }, [data.password]);
 
 
     const handleChange = (e) => {
@@ -64,7 +56,7 @@ const FeesForm = () => {
 
 
                         <TextField
-                            type="text"
+                            type="number"
                             name="amountmaster"
                             id="standard-basic"
                             value={amountmaster || ''}

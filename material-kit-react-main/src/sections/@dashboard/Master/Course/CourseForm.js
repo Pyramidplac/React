@@ -14,16 +14,6 @@ const CourseForm = () => {
     // const [state, setState] = useState({ date: new Date() });
 
     const [data, setdata] = useState("");
-    useEffect(() => {
-        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-            if (value !== data.password) return false;
-
-            return true;
-        });
-        return () => ValidatorForm.removeValidationRule('isPasswordMatch');
-    }, [data.password]);
-
-
     const handleChange = (e) => {
         e.persist();
         setdata({ ...data, [e.target.name]: e.target.value })
