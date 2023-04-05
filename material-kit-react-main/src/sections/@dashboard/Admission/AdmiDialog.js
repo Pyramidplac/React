@@ -26,14 +26,13 @@ export default function AdmiDialog() {
       <Dialog
         open={open}
         onClose={handleClose}
-        // fullScreen
         fullWidth
         maxWidth="lg"
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          <h3 className="bg-light p-3 rounded-3">Student Info</h3>
+          <DialogTitle id="alert-dialog-title">{'Admission'}</DialogTitle>
         </DialogTitle>
         <DialogContent>
           <AdmiForm />

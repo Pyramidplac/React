@@ -13,9 +13,9 @@ import FinancialDB from './pages/FinancialDB';
 import Admission from './pages/Admission';
 import Questionpage from './pages/Questionpage';
 import Master from './pages/Master';
-import Subject from './pages/Subject';
-import FeesPackage from './pages/FeesPackage';
 import Course from './pages/Course';
+import FeesPackage from './pages/FeesPackage';
+import Subject from './pages/Subject';
 
 // ----------------------------------------------------------------------
 
@@ -46,10 +46,12 @@ export default function Router() {
     {
       path: 'subject',
       element: <Subject />,
-    }, {
+    },
+    {
       path: 'course',
       element: <Course />,
-    }, {
+    },
+    {
       path: 'fees',
       element: <FeesPackage />,
     },

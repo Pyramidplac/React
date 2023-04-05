@@ -65,7 +65,22 @@ const UserForm = () => {
 
   const handleChange = (e) => {
     e.persist();
-    setdata({ ...data, [e.target.name]: e.target.value });
+    // setdata({ ...data, [e.target.name]: e.target.value });
+    if (e.target.name === 'course') {
+      const mydata = data.hobbies;
+
+      if (e.target.checked) {
+        mydata.push(e.target.value);
+        setdata({ ...data, hobbies: mydata });
+      } else {
+        const mydata1 = mydata.filter((val) => {
+          return val !== e.target.value;
+        });
+        setdata({ ...data, hobbies: mydata1 });
+      }
+    } else {
+      setdata({ ...data, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -100,7 +115,7 @@ const UserForm = () => {
 
   return (
     <div>
-      <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
+      <ValidatorForm onSubmit={handleSubmit} onError={() => null} autocomplete="off">
         <Grid container spacing={8}>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
@@ -294,29 +309,14 @@ const UserForm = () => {
               id="tags-standard"
               options={Course}
               getOptionLabel={(option) => option}
-
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => (
-                <MenuItem
-                  key={option}
-                  value={option}
-                  sx={{ justifyContent: "space-between" }}
-                  {...props}
-                >
+                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
                   {option}
                   {selected ? <CheckIcon color="info" /> : null}
                 </MenuItem>
               )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  value={course || ''}
-                  variant="outlined"
-                  label="Select Course"
-                  placeholder="Select Course"
-                  name='course'
-                />
-              )}
+              renderInput={(params) => <TextField {...params} variant="outlined" />}
             />
           </Grid>
         </Grid>
