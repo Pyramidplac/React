@@ -11,6 +11,7 @@ import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import FinancialDB from './pages/FinancialDB';
 import Admission from './pages/Admission';
+import Questionpage from './pages/Questionpage';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,7 @@ export default function Router() {
         { path: 'financialDB', element: <FinancialDB /> },
         { path: 'student', element: <UserPage /> },
         { path: 'admission', element: <Admission /> },
+        { path: 'question', element: <Questionpage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],

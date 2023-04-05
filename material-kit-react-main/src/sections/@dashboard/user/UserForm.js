@@ -316,16 +316,7 @@ const UserForm = () => {
                   {selected ? <CheckIcon color="info" /> : null}
                 </MenuItem>
               )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  value={course || ''}
-                  variant="outlined"
-                  label="Select Course"
-                  placeholder="Select Course"
-                  name="course"
-                />
-              )}
+              renderInput={(params) => <TextField {...params} variant="outlined" />}
             />
           </Grid>
         </Grid>
