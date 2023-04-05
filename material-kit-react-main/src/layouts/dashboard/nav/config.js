@@ -1,7 +1,11 @@
 // component
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
+import WidgetsIcon from '@mui/icons-material/Widgets';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import SvgColor from '../../../components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -22,18 +26,18 @@ const navConfig = [
   {
     title: 'Student Info',
     path: '/dashboard/student',
-    icon: icon('ic_user'),
+    icon: <AccountBoxIcon />,
   },
   {
     title: 'Admission',
     path: '/dashboard/admission',
-    icon: icon('ic_user'),
+    icon: <SensorOccupiedIcon />,
   },
   // -------------------------------------------------------
   {
     title: 'Master',
     path: '/dashboard/master',
-    icon: <SettingsAccessibilityIcon />,
+    icon: <WidgetsIcon />,
   },
   // -------------------------------------------------------
   {
@@ -42,14 +46,14 @@ const navConfig = [
     icon: <QuestionAnswerIcon />,
   },
   {
-    title: 'product',
+    title: 'course',
     path: '/dashboard/products',
-    icon: <QuestionAnswerIcon />,
+    icon: <ImportContactsIcon />,
   },
   {
-    title: 'blog',
+    title: 'event',
     path: '/dashboard/blog',
-    icon: icon('ic_blog'),
+    icon: <PendingActionsIcon />,
   },
   // {
   //   title: 'login',
