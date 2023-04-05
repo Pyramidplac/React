@@ -1,4 +1,7 @@
 // component
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
 import SvgColor from '../../../components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -14,7 +17,7 @@ const navConfig = [
   {
     title: 'dashboard',
     path: '/dashboard/FinancialDB',
-    icon: icon('ic_analytics'),
+    icon: <BarChartIcon />,
   },
   {
     title: 'Student Info',
@@ -30,18 +33,18 @@ const navConfig = [
   {
     title: 'Master',
     path: '/dashboard/master',
-    icon: icon('ic_user'),
+    icon: <SettingsAccessibilityIcon />,
   },
   // -------------------------------------------------------
   {
     title: 'question',
     path: '/dashboard/question',
-    icon: icon('ic_user'),
+    icon: <QuestionAnswerIcon />,
   },
   {
     title: 'product',
     path: '/dashboard/products',
-    icon: icon('ic_cart'),
+    icon: <QuestionAnswerIcon />,
   },
   {
     title: 'blog',
