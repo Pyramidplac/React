@@ -33,7 +33,7 @@ const QuestionForm = () => {
 
   // const handleDateChange = (date) => setState({ ...state, date });
 
-  const { question, answer } = data;
+  const { qtype, question, answer } = data;
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
@@ -42,6 +42,22 @@ const QuestionForm = () => {
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
               Question & Answer
             </h4>
+            <TextField
+              label="Question Type"
+              select
+              value={qtype || ''}
+              variant="filled"
+              helperText="Please Select Question Type"
+              onChange={handleChange}
+              name="qtype"
+              SelectProps={{
+                native: 'true',
+              }}
+            >
+              <option />
+              <option>Book1</option>
+              <option>Book2</option>
+            </TextField>
             <TextField
               type="text"
               name="question"
@@ -65,10 +81,25 @@ const QuestionForm = () => {
           </Grid>
         </Grid>
 
-        <Button color="primary" variant="contained" type="submit">
-          <SendIcon />
-          <span> Submit</span>
-        </Button>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-6 mb-2">
+
+              <Button color="error" variant="contained" type="submit" fullWidth onClick={() => {
+                setdata('');
+              }}>
+                <DeleteIcon />
+                <span> Clear</span>
+              </Button>
+            </div>
+            <div className="col-sm-6 mb-2" >
+              <Button color="primary" variant="contained" type="submit" fullWidth>
+                <SendIcon />
+                <span> Submit</span>
+              </Button>
+            </div>
+          </div>
+        </div>
       </ValidatorForm>
     </div>
   );

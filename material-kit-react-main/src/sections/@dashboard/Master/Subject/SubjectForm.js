@@ -33,7 +33,7 @@ const SubjectForm = () => {
 
   // const handleDateChange = (date) => setState({ ...state, date });
 
-  const { subject, timeline } = data;
+  const { category, subject, timeline } = data;
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
@@ -63,13 +63,45 @@ const SubjectForm = () => {
               label="Timeline in hours "
               validators={['required']}
             />
+
+            <TextField
+              label="Category"
+              select
+              value={category || ''}
+              variant="filled"
+              helperText="Please Select subject category"
+              onChange={handleChange}
+              name="category"
+              SelectProps={{
+                native: 'true',
+              }}
+            >
+              <option />
+              <option>IT</option>
+              <option>Spoken</option>
+            </TextField>
           </Grid>
         </Grid>
 
-        <Button color="primary" variant="contained" type="submit">
-          <SendIcon />
-          <span> Submit</span>
-        </Button>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-6 mb-2">
+
+              <Button color="error" variant="contained" type="submit" fullWidth onClick={() => {
+                setdata('');
+              }}>
+                <DeleteIcon />
+                <span> Clear</span>
+              </Button>
+            </div>
+            <div className="col-sm-6 mb-2" >
+              <Button color="primary" variant="contained" type="submit" fullWidth>
+                <SendIcon />
+                <span> Submit</span>
+              </Button>
+            </div>
+          </div>
+        </div>
       </ValidatorForm>
     </div>
   );
