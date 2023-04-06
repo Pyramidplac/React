@@ -7,7 +7,6 @@ import BlogPage from './pages/BlogPage';
 import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
-import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import FinancialDB from './pages/FinancialDB';
 import Admission from './pages/Admission';
@@ -16,6 +15,7 @@ import Master from './pages/Master';
 import Course from './pages/Course';
 import FeesPackage from './pages/FeesPackage';
 import Subject from './pages/Subject';
+import CoursePage from './pages/CoursePage';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ export default function Router() {
         { path: 'admission', element: <Admission /> },
         { path: 'master', element: <Master /> },
         { path: 'question', element: <Questionpage /> },
-        { path: 'products', element: <ProductsPage /> },
+        { path: 'course', element: <CoursePage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
     },

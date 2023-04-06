@@ -47,7 +47,7 @@ const navConfig = [
   },
   {
     title: 'course',
-    path: '/dashboard/products',
+    path: '/dashboard/course',
     icon: <ImportContactsIcon />,
   },
   {

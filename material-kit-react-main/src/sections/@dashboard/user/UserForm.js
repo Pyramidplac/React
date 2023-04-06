@@ -10,6 +10,8 @@ import {
   RadioGroup,
   styled,
 } from '@mui/material';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
+
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
@@ -221,7 +223,7 @@ const UserForm = () => {
               errorMessages={['this field is required']}
             />
 
-            <TextField
+            {/* <TextField
               placeholder="Address"
               multiline
               // rows={2}
@@ -232,6 +234,17 @@ const UserForm = () => {
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
+            /> */}
+
+            <TextareaAutosize
+              name="address"
+              aria-label="empty textarea"
+              onChange={handleChange}
+              validators={['required']}
+              value={address || ''}
+              minRows={3}
+              placeholder="Address..."
+              style={{ width: '100%' }}
             />
             <TextField
               type="text"
@@ -305,6 +318,7 @@ const UserForm = () => {
             </TextField>
 
             <Autocomplete
+              name="course"
               multiple
               id="tags-standard"
               options={Course}
