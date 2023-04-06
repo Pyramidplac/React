@@ -4,6 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import axios from 'axios';
 import CheckIcon from '@mui/icons-material/Check';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { toast } from 'react-toastify';
 
 const TextField = styled(TextValidator)(() => ({
@@ -278,7 +279,15 @@ const AdmiForm = () => {
           </Grid>
         </Grid>
 
-        <Button color="primary" variant="contained" type="submit">
+        <Button color="error" className='mx-2' variant="contained" type="submit" onClick={() => {
+          setdata('');
+        }}>
+          <DeleteIcon />
+          <span> Clear</span>
+        </Button>
+
+
+        <Button color="primary" className='mx-2' variant="contained" type="submit"    >
           <SendIcon />
           <span> Submit</span>
         </Button>

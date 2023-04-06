@@ -1,6 +1,7 @@
 import { Button, Checkbox, FormControlLabel, Grid, Icon, Radio, RadioGroup, styled } from '@mui/material';
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -53,7 +54,7 @@ const SubjectForm = () => {
             />
 
             <TextField
-              type="number"
+              type="text"
               name="timeline"
               id="standard-basic"
               value={timeline || ''}

@@ -1,6 +1,7 @@
 import { Button, Checkbox, FormControlLabel, Grid, Icon, Radio, RadioGroup, styled } from '@mui/material';
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -35,7 +36,7 @@ const QuestionForm = () => {
   const { question, answer } = data;
   return (
     <div>
-      <ValidatorForm onSubmit={handleSubmit} onError={() => null} autocomplete="off">
+      <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
         <Grid container spacing={8}>
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2 }}>
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
