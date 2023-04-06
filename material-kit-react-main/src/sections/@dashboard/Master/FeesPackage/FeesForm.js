@@ -1,6 +1,7 @@
 import { Button, Checkbox, FormControlLabel, Grid, Icon, Radio, RadioGroup, styled } from '@mui/material';
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -85,10 +86,25 @@ const FeesForm = () => {
 
                 </Grid>
 
-                <Button color="primary" variant="contained" type="submit">
-                    <SendIcon />
-                    <span> Submit</span>
-                </Button>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-6 mb-2">
+
+                            <Button color="error" variant="contained" type="submit" fullWidth onClick={() => {
+                                setdata('');
+                            }}>
+                                <DeleteIcon />
+                                <span> Clear</span>
+                            </Button>
+                        </div>
+                        <div className="col-sm-6 mb-2" >
+                            <Button color="primary" variant="contained" type="submit" fullWidth>
+                                <SendIcon />
+                                <span> Submit</span>
+                            </Button>
+                        </div>
+                    </div>
+                </div>
             </ValidatorForm>
         </div>
     );

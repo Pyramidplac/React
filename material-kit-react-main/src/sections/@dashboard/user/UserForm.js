@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -307,6 +308,7 @@ const UserForm = () => {
             <Autocomplete
               multiple
               id="tags-standard"
+              helperText="Please Select your lead source"
               options={Course}
               getOptionLabel={(option) => option}
               disableCloseOnSelect
@@ -321,10 +323,23 @@ const UserForm = () => {
           </Grid>
         </Grid>
 
-        <Button color="primary" variant="contained" type="submit">
+
+
+
+        <Button color="error" className='mx-2' variant="contained" type="submit" onClick={() => {
+          setdata('');
+        }}>
+          <DeleteIcon />
+          <span> Clear</span>
+        </Button>
+
+
+        <Button color="primary" className='mx-2' variant="contained" type="submit"    >
           <SendIcon />
           <span> Submit</span>
         </Button>
+
+
       </ValidatorForm>
     </div>
   );
