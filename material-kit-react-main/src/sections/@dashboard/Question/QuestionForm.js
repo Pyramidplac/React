@@ -14,26 +14,26 @@ const TextField = styled(TextValidator)(() => ({
 const QuestionForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
-  const [data, setdata] = useState('');
+  const [data, setdata] = useState({
+    // qtype: "",
+    question: '',
+    answer: '',
+  });
 
   const handleChange = (e) => {
-    e.persist();
     setdata({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
-    console.log(data);
     e.preventDefault();
-    // --------------------------API----------------------------
-    axios.post('', data).then((r) => {
+    axios.post('http://localhost:2103/api/shital', data).then((r) => {
       console.log(r.data);
-      toast('Registration successfully..');
     });
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });
 
-  const { qtype, question, answer } = data;
+  const { question, answer } = data;
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
@@ -43,26 +43,10 @@ const QuestionForm = () => {
               Question & Answer
             </h4>
             <TextField
-              label="Question Type"
-              select
-              value={qtype || ''}
-              variant="filled"
-              helperText="Please Select Question Type"
-              onChange={handleChange}
-              name="qtype"
-              SelectProps={{
-                native: 'true',
-              }}
-            >
-              <option />
-              <option>Book1</option>
-              <option>Book2</option>
-            </TextField>
-            <TextField
               type="text"
               name="question"
               id="standard-basic"
-              value={question || ''}
+              value={data.question || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Question"
@@ -72,7 +56,7 @@ const QuestionForm = () => {
               type="text"
               name="answer"
               id="standard-basic"
-              value={answer || ''}
+              value={data.answer || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Answer"
@@ -81,30 +65,10 @@ const QuestionForm = () => {
           </Grid>
         </Grid>
 
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-6 mb-2">
-              <Button
-                color="error"
-                variant="contained"
-                type="submit"
-                fullWidth
-                onClick={() => {
-                  setdata('');
-                }}
-              >
-                <DeleteIcon />
-                <span> Clear</span>
-              </Button>
-            </div>
-            <div className="col-sm-6 mb-2">
-              <Button color="primary" variant="contained" type="submit" fullWidth>
-                <SendIcon />
-                <span> Submit</span>
-              </Button>
-            </div>
-          </div>
-        </div>
+        <Button color="primary" variant="contained" type="submit">
+          <SendIcon />
+          <span> Submit</span>
+        </Button>
       </ValidatorForm>
     </div>
   );

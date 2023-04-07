@@ -54,7 +54,7 @@ const SubjectForm = () => {
             />
 
             <TextField
-              type="number"
+              type="text"
               name="timeline"
               id="standard-basic"
               value={timeline || ''}

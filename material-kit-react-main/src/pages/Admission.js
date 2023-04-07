@@ -42,7 +42,7 @@ export default function UserPage() {
     },
   ]);
   useEffect(() => {
-    fetch('http://localhost:8008/users')
+    fetch('http://localhost:2103/users')
       .then((y) => y.json())
       .then((y) => setrow(y.data));
   }, []);

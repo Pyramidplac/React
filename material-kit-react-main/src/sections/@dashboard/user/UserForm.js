@@ -10,8 +10,6 @@ import {
   RadioGroup,
   styled,
 } from '@mui/material';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
-
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -55,6 +53,48 @@ const Course = [
 
 const UserForm = () => {
   const [data, setdata] = useState('');
+
+  useEffect(() => {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+      if (value !== data.password) return false;
+
+      return true;
+    });
+    return () => ValidatorForm.removeValidationRule('isPasswordMatch');
+  }, [data.password]);
+
+  const handleChange = (e) => {
+    e.persist();
+    // setdata({ ...data, [e.target.name]: e.target.value });
+    if (e.target.name === 'course') {
+      const mydata = data.hobbies;
+
+      if (e.target.checked) {
+        mydata.push(e.target.value);
+        setdata({ ...data, hobbies: mydata });
+      } else {
+        const mydata1 = mydata.filter((val) => {
+          return val !== e.target.value;
+        });
+        setdata({ ...data, hobbies: mydata1 });
+      }
+    } else {
+      setdata({ ...data, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    console.log(data);
+    e.preventDefault();
+    // --------------------------API----------------------------
+    axios.post('', data).then((r) => {
+      console.log(r.data);
+      toast('Registration successfully..');
+    });
+  };
+
+  // const handleDateChange = (date) => setState({ ...state, date });
+
   const {
     name,
     parentsname,
@@ -197,7 +237,6 @@ const UserForm = () => {
               validators={['required', 'isEmail']}
               errorMessages={['this field is required', 'email is not valid']}
             />
-
             <TextField
               type="text"
               name="studentmobile"
@@ -225,8 +264,7 @@ const UserForm = () => {
               validators={['required']}
               errorMessages={['this field is required']}
             />
-
-            {/* <TextField
+            <TextField
               placeholder="Address"
               multiline
               // rows={2}
@@ -237,35 +275,8 @@ const UserForm = () => {
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
-            /> */}
-
-            {/* <Multiselect
-              name="course"
-              isObject={false}
-              onRemove={(event) => {
-                console.log(event);
-              }}
-              onSelect={(event) => {
-                console.log(event);
-              }}
-              options={Course}
-              showCheckbox
-            /> */}
-            {/* <Autocomplete
-              multiple
-              id="tags-standard"
-              options={Course}
-              getOptionLabel={(option) => option}
-              disableCloseOnSelect
-              renderOption={(props, option, { selected }) => (
-                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
-                  {option}
-                  {selected ? <CheckIcon color="info" /> : null}
-                </MenuItem>
-              )}
-              renderInput={(params) => <TextField {...params} variant="outlined" />}
-            /> */}
-
+            />{' '}
+            */}
             <TextareaAutosize
               name="address"
               aria-label="empty textarea"
@@ -344,6 +355,23 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
+
+            <Autocomplete
+              name="course"
+              multiple
+              id="tags-standard"
+              helperText="Please Select your lead source"
+              options={Course}
+              getOptionLabel={(option) => option}
+              disableCloseOnSelect
+              renderOption={(props, option, { selected }) => (
+                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
+                  {option}
+                  {selected ? <CheckIcon color="info" /> : null}
+                </MenuItem>
+              )}
+              renderInput={(params) => <TextField {...params} variant="outlined" />}
+            />
           </Grid>
         </Grid>
 

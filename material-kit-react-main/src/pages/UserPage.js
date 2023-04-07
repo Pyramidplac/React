@@ -29,19 +29,18 @@ import UserDialog from '../sections/@dashboard/user/UserDialog';
 export default function UserPage() {
   const [rows, setrow] = useState([]);
   const [columns, setcol] = useState([
-    { field: 'id', headerName: 'ID', width: 10 },
     { field: 'name', headerName: 'First name', width: 130 },
     { field: 'username', headerName: 'Username', width: 150 },
     { field: 'email', headerName: 'Email', width: 200 },
     {
       field: 'phone',
       headerName: 'Phone',
+      type: 'number',
       width: 150,
     },
-    { field: '', headerName: 'delete', width: 200 },
   ]);
   useEffect(() => {
-    fetch('http://localhost:8008/users')
+    fetch('http://localhost:2103/users')
       .then((y) => y.json())
       .then((y) => setrow(y.data));
   }, []);
