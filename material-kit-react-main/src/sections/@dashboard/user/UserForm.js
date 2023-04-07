@@ -20,6 +20,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import CheckIcon from '@mui/icons-material/Check';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Multiselect from 'multiselect-react-dropdown';
 
 const TextField = styled(TextValidator)(() => ({
   width: '100%',
@@ -53,51 +54,7 @@ const Course = [
 ];
 
 const UserForm = () => {
-  // const [state, setState] = useState({ date: new Date() });
-
   const [data, setdata] = useState('');
-
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-      if (value !== data.password) return false;
-
-      return true;
-    });
-    return () => ValidatorForm.removeValidationRule('isPasswordMatch');
-  }, [data.password]);
-
-  const handleChange = (e) => {
-    e.persist();
-    // setdata({ ...data, [e.target.name]: e.target.value });
-    if (e.target.name === 'course') {
-      const mydata = data.hobbies;
-
-      if (e.target.checked) {
-        mydata.push(e.target.value);
-        setdata({ ...data, hobbies: mydata });
-      } else {
-        const mydata1 = mydata.filter((val) => {
-          return val !== e.target.value;
-        });
-        setdata({ ...data, hobbies: mydata1 });
-      }
-    } else {
-      setdata({ ...data, [e.target.name]: e.target.value });
-    }
-  };
-
-  const handleSubmit = (e) => {
-    console.log(data);
-    e.preventDefault();
-    // --------------------------API----------------------------
-    axios.post('', data).then((r) => {
-      console.log(r.data);
-      toast('Registration successfully..');
-    });
-  };
-
-  // const handleDateChange = (date) => setState({ ...state, date });
-
   const {
     name,
     parentsname,
@@ -116,6 +73,50 @@ const UserForm = () => {
     leadsource,
   } = data;
 
+  // -------------------------------------------------------------------------------------------
+
+  useEffect(() => {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+      if (value !== data.password) return false;
+
+      return true;
+    });
+    return () => ValidatorForm.removeValidationRule('isPasswordMatch');
+  }, [data.password]);
+
+  // -------------------------------------------------------------------------------------------
+
+  const handleChange = (e) => {
+    e.persist();
+    // setdata({ ...data, [e.target.name]: e.target.value });
+    if (e.target.name === 'course') {
+      const mydata = data.course;
+
+      if (e.target.checked) {
+        mydata.push(e.target.value);
+        setdata({ ...data, course: mydata });
+      } else {
+        const mydata1 = mydata.filter((val) => {
+          return val !== e.target.value;
+        });
+        setdata({ ...data, course: mydata1 });
+      }
+    } else {
+      setdata({ ...data, [e.target.name]: e.target.value });
+    }
+  };
+  // -------------------------------------------------------------------------------------------
+
+  const handleSubmit = (e) => {
+    console.log(data);
+    e.preventDefault();
+    // --------------------------API----------------------------
+    // axios.post('', data).then((r) => {
+    //   console.log(r.data);
+    //   toast('Registration successfully..');
+    // });
+  };
+
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null} autocomplete="off">
@@ -124,6 +125,7 @@ const UserForm = () => {
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
               Student Details
             </h4>
+
             <TextField
               type="text"
               name="name"
@@ -237,6 +239,33 @@ const UserForm = () => {
               errorMessages={['this field is required']}
             /> */}
 
+            {/* <Multiselect
+              name="course"
+              isObject={false}
+              onRemove={(event) => {
+                console.log(event);
+              }}
+              onSelect={(event) => {
+                console.log(event);
+              }}
+              options={Course}
+              showCheckbox
+            /> */}
+            {/* <Autocomplete
+              multiple
+              id="tags-standard"
+              options={Course}
+              getOptionLabel={(option) => option}
+              disableCloseOnSelect
+              renderOption={(props, option, { selected }) => (
+                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
+                  {option}
+                  {selected ? <CheckIcon color="info" /> : null}
+                </MenuItem>
+              )}
+              renderInput={(params) => <TextField {...params} variant="outlined" />}
+            /> */}
+
             <TextareaAutosize
               name="address"
               aria-label="empty textarea"
@@ -256,8 +285,6 @@ const UserForm = () => {
               validators={['required']}
               errorMessages={['this field is required']}
             />
-
-            {/* <FormControlLabel control={<Checkbox />} label="I have read and agree to the terms of service." /> */}
           </Grid>
 
           {/* ================================================================================== */}
@@ -317,43 +344,26 @@ const UserForm = () => {
               <option>Reference</option>
               <option>Other</option>
             </TextField>
-
-            <Autocomplete
-              name="course"
-              multiple
-              id="tags-standard"
-              helperText="Please Select your lead source"
-              options={Course}
-              getOptionLabel={(option) => option}
-              disableCloseOnSelect
-              renderOption={(props, option, { selected }) => (
-                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
-                  {option}
-                  {selected ? <CheckIcon color="info" /> : null}
-                </MenuItem>
-              )}
-              renderInput={(params) => <TextField {...params} variant="outlined" />}
-            />
           </Grid>
         </Grid>
 
-
-
-
-        <Button color="error" className='mx-2' variant="contained" type="submit" onClick={() => {
-          setdata('');
-        }}>
+        <Button
+          color="error"
+          className="mx-2"
+          variant="contained"
+          type="submit"
+          onClick={() => {
+            setdata('');
+          }}
+        >
           <DeleteIcon />
           <span> Clear</span>
         </Button>
 
-
-        <Button color="primary" className='mx-2' variant="contained" type="submit"    >
+        <Button color="primary" className="mx-2" variant="contained" type="submit">
           <SendIcon />
           <span> Submit</span>
         </Button>
-
-
       </ValidatorForm>
     </div>
   );

@@ -55,6 +55,7 @@ export default function Router() {
       path: 'fees',
       element: <FeesPackage />,
     },
+
     // ----------------------------------------------
     {
       element: <SimpleLayout />,

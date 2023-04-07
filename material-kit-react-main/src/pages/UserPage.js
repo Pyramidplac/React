@@ -36,9 +36,9 @@ export default function UserPage() {
     {
       field: 'phone',
       headerName: 'Phone',
-      type: 'number',
       width: 150,
     },
+    { field: '', headerName: 'delete', width: 200 },
   ]);
   useEffect(() => {
     fetch('http://localhost:8008/users')
