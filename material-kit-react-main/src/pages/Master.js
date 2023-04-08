@@ -15,6 +15,15 @@ const Master = () => {
     const feespage = () => {
         myNav("/fees")
     }
+    const questiontype = () => {
+        myNav("/questiontype")
+    }
+    const academicyear = () => {
+        myNav("/academicyear")
+    }
+    const takenby = () => {
+        myNav("/takenby")
+    }
     return (
         <>
             <Helmet>
@@ -47,6 +56,25 @@ const Master = () => {
                             <span> Fees Package</span>
                         </Button>
                     </div>
+                </div>
+                <div className="row mt-3">
+                    <div className="col-sm-4">
+                        <Button color="primary" variant="contained" type="submit" onClick={questiontype} fullWidth>
+                            <span> Question type</span>
+                        </Button>
+                    </div>
+                    <div className="col-sm-4">
+                        <Button color="primary" variant="contained" type="submit" onClick={academicyear} fullWidth>
+                            <span> Academic Year</span>
+                        </Button>
+                    </div>
+                    <div className="col-sm-4">
+                        <Button color="primary" variant="contained" type="submit" onClick={takenby} fullWidth>
+                            <span> Taken By</span>
+                        </Button>
+                    </div>
+
+
                 </div>
 
 

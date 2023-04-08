@@ -42,9 +42,7 @@ const CourseDialog = () => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">
-                    <h3 className="bg-light p-3 rounded-3">Add Course</h3>
-                </DialogTitle>
+
                 <DialogContent>
                     <CourseForm />
                 </DialogContent>

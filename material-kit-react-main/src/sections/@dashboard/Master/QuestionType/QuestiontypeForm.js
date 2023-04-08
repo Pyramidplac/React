@@ -11,13 +11,11 @@ const TextField = styled(TextValidator)(() => ({
     marginBottom: '16px',
 }));
 
-const FeesForm = () => {
+const QuestiontypeForm = () => {
     // const [state, setState] = useState({ date: new Date() });
 
     const [data, setdata] = useState({
-        feesmaster: "",
-        amountmaster: "",
-        daymaster: ""
+        questiontype: ""
     });
 
 
@@ -47,41 +45,18 @@ const FeesForm = () => {
                 <Grid container spacing={8}>
                     <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2 }}>
                         <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
-                            Fees Details
+                            Question type
                         </h4>
                         <TextField
                             type="text"
-                            name="feesmaster"
+                            name="questiontype"
                             id="standard-basic"
-                            value={data.feesmaster || ''}
+                            value={data.questiontype || ''}
                             onChange={handleChange}
                             errorMessages={['this field is required']}
-                            label="Fees Package Title* "
+                            label="Question Type "
                             validators={['required']}
                         />
-
-
-                        <TextField
-                            type="number"
-                            name="amountmaster"
-                            id="standard-basic"
-                            value={data.amountmaster || ''}
-                            onChange={handleChange}
-                            errorMessages={['this field is required']}
-                            label="Amount "
-                            validators={['required']}
-                        />
-                        <TextField
-                            type='number'
-                            name="daymaster"
-                            id="standard-basic"
-                            value={data.daymaster || ''}
-                            onChange={handleChange}
-                            errorMessages={['this field is required']}
-                            label="Total Days of Course "
-                            validators={['required']}
-                        />
-
 
 
 
@@ -115,5 +90,6 @@ const FeesForm = () => {
     );
 };
 
-export default FeesForm;
+export default QuestiontypeForm;
+
 

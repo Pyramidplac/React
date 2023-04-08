@@ -158,8 +158,8 @@ export default function Questionpage() {
   }, []);
 
   const columns = [
-    { field: 'question', headerName: 'ID', width: 10 },
-    { field: 'answer', headerName: 'First name', width: 130 },
+    { field: 'question', headerName: 'Question', width: 10 },
+    { field: 'answer', headerName: 'Answer', width: 130 },
 
 
 

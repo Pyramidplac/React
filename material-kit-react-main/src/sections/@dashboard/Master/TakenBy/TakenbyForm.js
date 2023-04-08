@@ -11,31 +11,27 @@ const TextField = styled(TextValidator)(() => ({
     marginBottom: '16px',
 }));
 
-const FeesForm = () => {
+const TakenbyForm = () => {
     // const [state, setState] = useState({ date: new Date() });
 
     const [data, setdata] = useState({
-        feesmaster: "",
-        amountmaster: "",
-        daymaster: ""
+        takenby: ""
     });
-
 
     const handleChange = (e) => {
         e.persist();
-        setdata({ ...data, [e.target.name]: e.target.value })
+        setdata({ ...data, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
         console.log(data);
-        e.preventDefault()
+        e.preventDefault();
         // --------------------------API----------------------------
-        axios.post("", data)
-            .then(r => {
-                console.log(r.data);
-                toast("Registration successfully..")
-                setdata(e.target.value = "");
-            })
+        axios.post('', data).then((r) => {
+            console.log(r.data);
+            toast('Registration successfully..');
+            setdata(e.target.value = "");
+        });
     };
 
     // const handleDateChange = (date) => setState({ ...state, date });
@@ -47,48 +43,21 @@ const FeesForm = () => {
                 <Grid container spacing={8}>
                     <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2 }}>
                         <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
-                            Fees Details
+                            Taken By
                         </h4>
                         <TextField
                             type="text"
-                            name="feesmaster"
+                            name="takenby"
                             id="standard-basic"
-                            value={data.feesmaster || ''}
+                            value={data.takenby || ''}
                             onChange={handleChange}
                             errorMessages={['this field is required']}
-                            label="Fees Package Title* "
+                            label="Taken By "
                             validators={['required']}
                         />
-
-
-                        <TextField
-                            type="number"
-                            name="amountmaster"
-                            id="standard-basic"
-                            value={data.amountmaster || ''}
-                            onChange={handleChange}
-                            errorMessages={['this field is required']}
-                            label="Amount "
-                            validators={['required']}
-                        />
-                        <TextField
-                            type='number'
-                            name="daymaster"
-                            id="standard-basic"
-                            value={data.daymaster || ''}
-                            onChange={handleChange}
-                            errorMessages={['this field is required']}
-                            label="Total Days of Course "
-                            validators={['required']}
-                        />
-
-
 
 
                     </Grid>
-
-
-
                 </Grid>
 
                 <div className="container">
@@ -115,5 +84,4 @@ const FeesForm = () => {
     );
 };
 
-export default FeesForm;
-
+export default TakenbyForm;

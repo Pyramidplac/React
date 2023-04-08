@@ -15,7 +15,7 @@ const QuestionForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
-    // qtype: "",
+    qtype: "",
     question: "",
     answer: ""
   });
@@ -32,6 +32,7 @@ const QuestionForm = () => {
       .then((r) => {
         console.log(r.data);
       })
+    setdata(e.target.value = "");
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });
@@ -39,13 +40,13 @@ const QuestionForm = () => {
 
   return (
     <div>
-      <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
+      <ValidatorForm onSubmit={handleSubmit} onError={() => null} autocomplete="off">
         <Grid container spacing={8}>
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2 }}>
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
               Question & Answer
             </h4>
-            {/* <TextField
+            <TextField
               label="Question Type"
               select
               value={data.qtype || ''}
@@ -60,7 +61,7 @@ const QuestionForm = () => {
               <option />
               <option>Book1</option>
               <option>Book2</option>
-            </TextField> */}
+            </TextField>
             <TextField
               type="text"
               name="question"

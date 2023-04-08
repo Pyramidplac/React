@@ -14,7 +14,11 @@ const TextField = styled(TextValidator)(() => ({
 const SubjectForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
-  const [data, setdata] = useState('');
+  const [data, setdata] = useState({
+    category: "",
+    subject: "",
+    timeline: ""
+  });
 
   const handleChange = (e) => {
     e.persist();
@@ -28,15 +32,16 @@ const SubjectForm = () => {
     axios.post('', data).then((r) => {
       console.log(r.data);
       toast('Registration successfully..');
+      setdata(e.target.value = "");
     });
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });
 
-  const { category, subject, timeline } = data;
+
   return (
     <div>
-      <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
+      <ValidatorForm onSubmit={handleSubmit} onError={() => null} autocomplete="off">
         <Grid container spacing={8}>
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2 }}>
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
@@ -46,7 +51,7 @@ const SubjectForm = () => {
               type="text"
               name="subject"
               id="standard-basic"
-              value={subject || ''}
+              value={data.subject || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Subject "
@@ -57,7 +62,7 @@ const SubjectForm = () => {
               type="text"
               name="timeline"
               id="standard-basic"
-              value={timeline || ''}
+              value={data.timeline || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Timeline in hours "
@@ -67,7 +72,7 @@ const SubjectForm = () => {
             <TextField
               label="Category"
               select
-              value={category || ''}
+              value={data.category || ''}
               variant="filled"
               helperText="Please Select subject category"
               onChange={handleChange}

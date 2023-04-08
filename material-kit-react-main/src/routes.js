@@ -16,6 +16,9 @@ import Course from './pages/Course';
 import FeesPackage from './pages/FeesPackage';
 import Subject from './pages/Subject';
 import CoursePage from './pages/CoursePage';
+import Questiontype from './pages/Questiontype';
+import AcademicYear from './pages/AcademicYear';
+import TakenBy from './pages/TakenBy';
 
 // ----------------------------------------------------------------------
 
@@ -54,6 +57,18 @@ export default function Router() {
     {
       path: 'fees',
       element: <FeesPackage />,
+    },
+    {
+      path: 'questiontype',
+      element: <Questiontype />,
+    },
+    {
+      path: 'academicyear',
+      element: <AcademicYear />,
+    },
+    {
+      path: 'takenby',
+      element: <TakenBy />,
     },
     // ----------------------------------------------
     {
