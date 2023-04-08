@@ -87,11 +87,11 @@ export default function Questionpage() {
       setRows(d);
       console.log(r);
     });
-  }, []);
+  }, [rows]);
 
   const columns = [
-    { field: 'question', headerName: 'ID', width: 10 },
-    { field: 'answer', headerName: 'First name', width: 130 },
+    { field: 'question', headerName: 'ID', width: 350 },
+    { field: 'answer', headerName: 'First name', width: 450 },
 
     {
       field: 'actions',

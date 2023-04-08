@@ -15,9 +15,9 @@ const SubjectForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
-    category: "",
-    subject: "",
-    timeline: ""
+    category: '',
+    subject: '',
+    timeline: '',
   });
 
   const handleChange = (e) => {
@@ -32,12 +32,11 @@ const SubjectForm = () => {
     axios.post('', data).then((r) => {
       console.log(r.data);
       toast('Registration successfully..');
-      setdata(e.target.value = "");
     });
+    setdata((e.target.value = ''));
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });
-
 
   return (
     <div>

@@ -54,21 +54,21 @@ const UserForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
-    name: "",
-    parentsname: "",
-    studentmobile: "",
-    parentmobile: "",
-    email: "",
-    birthdate: "",
-    gender: "",
-    whatsapp: "",
-    education: "",
-    address: "",
-    city: "",
-    enquirydate: "",
-    takenby: "",
+    name: '',
+    parentsname: '',
+    studentmobile: '',
+    parentmobile: '',
+    email: '',
+    birthdate: '',
+    gender: '',
+    whatsapp: '',
+    education: '',
+    address: '',
+    city: '',
+    enquirydate: '',
+    takenby: '',
     course: [],
-    leadsource: "",
+    leadsource: '',
   });
 
   useEffect(() => {
@@ -108,9 +108,8 @@ const UserForm = () => {
       console.log(r.data);
       toast('Registration successfully..');
     });
+    setdata((e.target.value = ''));
   };
-
-
 
   return (
     <div>

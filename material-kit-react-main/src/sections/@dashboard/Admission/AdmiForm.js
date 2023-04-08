@@ -40,20 +40,20 @@ const Course = [
 
 const AdmiForm = () => {
   const [data, setdata] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    name: "",
-    batch: "",
-    medium: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
+    name: '',
+    batch: '',
+    medium: '',
     course: [],
-    startD: "",
-    endD: "",
-    takenby: "",
-    rollNO: "",
-    invoice: "",
-    admission: "",
-    academicYear: "",
+    startD: '',
+    endD: '',
+    takenby: '',
+    rollNO: '',
+    invoice: '',
+    admission: '',
+    academicYear: '',
   });
   useEffect(() => {
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
@@ -76,11 +76,9 @@ const AdmiForm = () => {
     axios.post('', data).then((r) => {
       console.log(r.data);
       toast('Registration successfully..');
-      setdata(e.target.value = "");
     });
+    setdata((e.target.value = ''));
   };
-
-
 
   return (
     <div>
@@ -171,6 +169,8 @@ const AdmiForm = () => {
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
               Course Details
             </h4>
+            {/* ================================================================== */}
+
             <Autocomplete
               multiple
               id="tags-standard"
@@ -183,8 +183,12 @@ const AdmiForm = () => {
                   {selected ? <CheckIcon color="info" /> : null}
                 </MenuItem>
               )}
+              onChange={handleChange}
               renderInput={(params) => <TextField {...params} variant="outlined" />}
             />
+
+            {/* ================================================================== */}
+
             <TextField
               name="startD"
               label="Start Date"
@@ -280,15 +284,20 @@ const AdmiForm = () => {
           </Grid>
         </Grid>
 
-        <Button color="error" className='mx-2' variant="contained" type="submit" onClick={() => {
-          setdata('');
-        }}>
+        <Button
+          color="error"
+          className="mx-2"
+          variant="contained"
+          type="submit"
+          onClick={() => {
+            setdata('');
+          }}
+        >
           <DeleteIcon />
           <span> Clear</span>
         </Button>
 
-
-        <Button color="primary" className='mx-2' variant="contained" type="submit"    >
+        <Button color="primary" className="mx-2" variant="contained" type="submit">
           <SendIcon />
           <span> Submit</span>
         </Button>

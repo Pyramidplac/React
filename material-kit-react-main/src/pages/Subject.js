@@ -36,7 +36,7 @@ export default function Subject() {
     fetch('http://localhost:2103/users')
       .then((y) => y.json())
       .then((y) => setrow(y.data));
-  }, []);
+  }, [rows]);
 
   return (
     <>
