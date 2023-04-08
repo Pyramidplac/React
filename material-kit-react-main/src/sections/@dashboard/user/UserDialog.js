@@ -34,7 +34,6 @@ export default function UserDialog() {
       >
         <DialogTitle id="alert-dialog-title">{'Student/Trainee/Lead Info'}</DialogTitle>
         <DialogContent>
-
           <UserForm />
         </DialogContent>
         <DialogActions>
