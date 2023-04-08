@@ -34,7 +34,7 @@ export default function Course() {
     { field: 'email', headerName: 'Course Type', width: 200 },
   ]);
   useEffect(() => {
-    fetch('http://localhost:8008/users')
+    fetch('http://localhost:2103/users')
       .then((y) => y.json())
       .then((y) => setrow(y.data));
   }, []);

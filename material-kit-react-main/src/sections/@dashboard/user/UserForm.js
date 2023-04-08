@@ -8,6 +8,7 @@ import {
   MenuItem,
   Radio,
   RadioGroup,
+  TextareaAutosize,
   styled,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -62,36 +63,6 @@ const UserForm = () => {
     });
     return () => ValidatorForm.removeValidationRule('isPasswordMatch');
   }, [data.password]);
-
-  const handleChange = (e) => {
-    e.persist();
-    // setdata({ ...data, [e.target.name]: e.target.value });
-    if (e.target.name === 'course') {
-      const mydata = data.hobbies;
-
-      if (e.target.checked) {
-        mydata.push(e.target.value);
-        setdata({ ...data, hobbies: mydata });
-      } else {
-        const mydata1 = mydata.filter((val) => {
-          return val !== e.target.value;
-        });
-        setdata({ ...data, hobbies: mydata1 });
-      }
-    } else {
-      setdata({ ...data, [e.target.name]: e.target.value });
-    }
-  };
-
-  const handleSubmit = (e) => {
-    console.log(data);
-    e.preventDefault();
-    // --------------------------API----------------------------
-    axios.post('', data).then((r) => {
-      console.log(r.data);
-      toast('Registration successfully..');
-    });
-  };
 
   // const handleDateChange = (date) => setState({ ...state, date });
 
@@ -275,8 +246,7 @@ const UserForm = () => {
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
-            />{' '}
-            */}
+            />
             <TextareaAutosize
               name="address"
               aria-label="empty textarea"

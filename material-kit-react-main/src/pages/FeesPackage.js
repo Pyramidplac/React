@@ -36,7 +36,7 @@ export default function FeesPackage() {
     { field: 'email', headerName: 'Total Days ', width: 250 },
   ]);
   useEffect(() => {
-    fetch('http://localhost:8008/users')
+    fetch('http://localhost:2103/users')
       .then((y) => y.json())
       .then((y) => setrow(y.data));
   }, []);

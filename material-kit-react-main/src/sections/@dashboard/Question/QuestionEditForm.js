@@ -11,7 +11,7 @@ const TextField = styled(TextValidator)(() => ({
   marginBottom: '16px',
 }));
 
-const QuestionForm = () => {
+const QuestionEditForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
@@ -110,4 +110,4 @@ const QuestionForm = () => {
   );
 };
 
-export default QuestionForm;
+export default QuestionEditForm;
