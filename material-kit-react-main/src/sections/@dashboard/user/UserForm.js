@@ -241,7 +241,7 @@ const UserForm = () => {
               aria-label="empty textarea"
               onChange={handleChange}
               validators={['required']}
-              value={address || ''}
+              value={data.address || ''}
               minRows={3}
               placeholder="Address..."
               style={{ width: '100%' }}
