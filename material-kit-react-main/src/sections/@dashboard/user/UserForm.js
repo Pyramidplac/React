@@ -53,8 +53,6 @@ const Course = [
 ];
 
 const UserForm = () => {
-  // const [state, setState] = useState({ date: new Date() });
-
   const [data, setdata] = useState('');
 
   useEffect(() => {
@@ -317,6 +315,8 @@ const UserForm = () => {
               <option>Other</option>
             </TextField>
 
+            {/* ============================================================================================ */}
+
             <Autocomplete
               name="course"
               multiple
@@ -333,6 +333,8 @@ const UserForm = () => {
               )}
               renderInput={(params) => <TextField {...params} variant="outlined" />}
             />
+
+            {/* ============================================================================================ */}
           </Grid>
         </Grid>
 
