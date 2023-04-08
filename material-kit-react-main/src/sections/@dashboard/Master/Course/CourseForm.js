@@ -15,10 +15,10 @@ const CourseForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
-    course: "",
-    coursefees: "",
-    year: "",
-    type: ""
+    course: '',
+    coursefees: '',
+    year: '',
+    type: '',
   });
   const handleChange = (e) => {
     e.persist();
@@ -32,12 +32,11 @@ const CourseForm = () => {
     axios.post('', data).then((r) => {
       console.log(r.data);
       toast('Registration successfully..');
-      setdata(e.target.value = "");
     });
+    setdata((e.target.value = ''));
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });
-
 
   return (
     <div>

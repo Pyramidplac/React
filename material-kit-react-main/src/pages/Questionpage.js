@@ -87,7 +87,7 @@ export default function Questionpage() {
       setRows(d);
       console.log(r);
     });
-  }, []);
+  }, [rows]);
 
   const columns = [
     { field: 'question', headerName: 'ID', width: 350 },

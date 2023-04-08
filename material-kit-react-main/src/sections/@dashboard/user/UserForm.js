@@ -53,7 +53,23 @@ const Course = [
 const UserForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
-  const [data, setdata] = useState('');
+  const [data, setdata] = useState({
+    name: '',
+    parentsname: '',
+    studentmobile: '',
+    parentmobile: '',
+    email: '',
+    birthdate: '',
+    gender: '',
+    whatsapp: '',
+    education: '',
+    address: '',
+    city: '',
+    enquirydate: '',
+    takenby: '',
+    course: [],
+    leadsource: '',
+  });
 
   useEffect(() => {
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
@@ -92,6 +108,7 @@ const UserForm = () => {
       console.log(r.data);
       toast('Registration successfully..');
     });
+    setdata((e.target.value = ''));
   };
 
   return (
@@ -223,7 +240,7 @@ const UserForm = () => {
               aria-label="empty textarea"
               onChange={handleChange}
               validators={['required']}
-              value={address || ''}
+              value={data.address || ''}
               minRows={3}
               placeholder="Address..."
               style={{ width: '100%' }}
@@ -297,8 +314,6 @@ const UserForm = () => {
               <option>Other</option>
             </TextField>
 
-            {/* ============================================================================================ */}
-
             <Autocomplete
               name="course"
               multiple
@@ -315,8 +330,6 @@ const UserForm = () => {
               )}
               renderInput={(params) => <TextField {...params} variant="outlined" />}
             />
-
-            {/* ============================================================================================ */}
           </Grid>
         </Grid>
 

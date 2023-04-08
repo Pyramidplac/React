@@ -76,8 +76,8 @@ const AdmiForm = () => {
     axios.post('', data).then((r) => {
       console.log(r.data);
       toast('Registration successfully..');
-      setdata((e.target.value = ''));
     });
+    setdata((e.target.value = ''));
   };
 
   return (
