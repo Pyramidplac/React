@@ -39,7 +39,22 @@ const Course = [
 ];
 
 const AdmiForm = () => {
-  const [data, setdata] = useState('');
+  const [data, setdata] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+    batch: "",
+    medium: "",
+    course: [],
+    startD: "",
+    endD: "",
+    takenby: "",
+    rollNO: "",
+    invoice: "",
+    admission: "",
+    academicYear: "",
+  });
   useEffect(() => {
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
       if (value !== data.password) return false;
@@ -61,25 +76,11 @@ const AdmiForm = () => {
     axios.post('', data).then((r) => {
       console.log(r.data);
       toast('Registration successfully..');
+      setdata(e.target.value = "");
     });
   };
 
-  const {
-    email,
-    password,
-    confirmPassword,
-    name,
-    batch,
-    medium,
-    course = [],
-    startD,
-    endD,
-    takenby,
-    rollNO,
-    invoice,
-    admission,
-    academicYear,
-  } = data;
+
 
   return (
     <div>
@@ -93,7 +94,7 @@ const AdmiForm = () => {
               type="email"
               name="email"
               label="Email"
-              value={email || ''}
+              value={data.email || ''}
               onChange={handleChange}
               validators={['required', 'isEmail']}
               autoComplete="off"
@@ -103,7 +104,7 @@ const AdmiForm = () => {
               name="password"
               type="password"
               label="Password"
-              value={password || ''}
+              value={data.password || ''}
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
@@ -113,7 +114,7 @@ const AdmiForm = () => {
               name="confirmPassword"
               onChange={handleChange}
               label="Confirm Password"
-              value={confirmPassword || ''}
+              value={data.confirmPassword || ''}
               validators={['required', 'isPasswordMatch']}
               errorMessages={['this field is required', "password didn't match"]}
             />
@@ -126,7 +127,7 @@ const AdmiForm = () => {
               type="text"
               name="name"
               id="standard-basic"
-              value={name || ''}
+              value={data.name || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Select Student "
@@ -135,7 +136,7 @@ const AdmiForm = () => {
             <TextField
               label="Medium "
               select
-              value={medium || ''}
+              value={data.medium || ''}
               variant="filled"
               onChange={handleChange}
               name="medium"
@@ -151,7 +152,7 @@ const AdmiForm = () => {
             <TextField
               label="Batch "
               select
-              value={batch || ''}
+              value={data.batch || ''}
               variant="filled"
               onChange={handleChange}
               name="batch"
@@ -177,7 +178,7 @@ const AdmiForm = () => {
               getOptionLabel={(option) => option}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => (
-                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
+                <MenuItem key={option} value={data.option} sx={{ justifyContent: 'space-between' }} {...props}>
                   {option}
                   {selected ? <CheckIcon color="info" /> : null}
                 </MenuItem>
@@ -189,7 +190,7 @@ const AdmiForm = () => {
               label="Start Date"
               InputLabelProps={{ shrink: true }}
               type="date"
-              value={startD || ''}
+              value={data.startD || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
             />
@@ -198,7 +199,7 @@ const AdmiForm = () => {
               label="Expected End Date"
               InputLabelProps={{ shrink: true }}
               type="date"
-              value={endD || ''}
+              value={data.endD || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
             />
@@ -212,7 +213,7 @@ const AdmiForm = () => {
               label="Taken By"
               select
               variant="filled"
-              value={takenby || ''}
+              value={data.takenby || ''}
               onChange={handleChange}
               name="takenby"
               SelectProps={{
@@ -229,7 +230,7 @@ const AdmiForm = () => {
               type="text"
               name="rollNO"
               id="standard-basic"
-              value={rollNO || ''}
+              value={data.rollNO || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="ID Card/Roll No "
@@ -239,7 +240,7 @@ const AdmiForm = () => {
               type="text"
               name="invoice"
               id="standard-basic"
-              value={invoice || ''}
+              value={data.invoice || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Invoice No"
@@ -250,14 +251,14 @@ const AdmiForm = () => {
               label="Admission Date"
               InputLabelProps={{ shrink: true }}
               type="date"
-              value={admission || ''}
+              value={data.admission || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
             />
             <TextField
               label="Academic Year "
               select
-              value={academicYear || ''}
+              value={data.academicYear || ''}
               variant="filled"
               onChange={handleChange}
               name="academicYear"

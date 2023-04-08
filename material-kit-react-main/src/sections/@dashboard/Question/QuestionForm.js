@@ -15,7 +15,7 @@ const QuestionForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
-    qtype: '',
+    // qtype: "",
     question: '',
     answer: '',
   });
@@ -29,7 +29,6 @@ const QuestionForm = () => {
     axios.post('http://localhost:2103/api/shital', data).then((r) => {
       console.log(r.data);
     });
-    setdata((e.target.value = ''));
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });

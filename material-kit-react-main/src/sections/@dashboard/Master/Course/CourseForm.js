@@ -14,7 +14,12 @@ const TextField = styled(TextValidator)(() => ({
 const CourseForm = () => {
   // const [state, setState] = useState({ date: new Date() });
 
-  const [data, setdata] = useState('');
+  const [data, setdata] = useState({
+    course: "",
+    coursefees: "",
+    year: "",
+    type: ""
+  });
   const handleChange = (e) => {
     e.persist();
     setdata({ ...data, [e.target.name]: e.target.value });
@@ -27,15 +32,16 @@ const CourseForm = () => {
     axios.post('', data).then((r) => {
       console.log(r.data);
       toast('Registration successfully..');
+      setdata(e.target.value = "");
     });
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });
 
-  const { course, coursefees, year, type } = data;
+
   return (
     <div>
-      <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
+      <ValidatorForm onSubmit={handleSubmit} onError={() => null} autocomplete="off">
         <Grid container spacing={8}>
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2 }}>
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
@@ -45,10 +51,20 @@ const CourseForm = () => {
               type="text"
               name="course"
               id="standard-basic"
-              value={course || ''}
+              value={data.course || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Course* "
+              validators={['required']}
+            />
+            <TextField
+              type="number"
+              name="coursefees"
+              id="standard-basic"
+              value={data.coursefees || ''}
+              onChange={handleChange}
+              errorMessages={['this field is required']}
+              label="Course Fees "
               validators={['required']}
             />
 
@@ -56,7 +72,7 @@ const CourseForm = () => {
               type="text"
               name="year"
               id="standard-basic"
-              value={year || ''}
+              value={data.year || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Academic Year "
@@ -67,7 +83,7 @@ const CourseForm = () => {
               label="Type"
               select
               variant="filled"
-              value={type || ''}
+              value={data.type || ''}
               onChange={handleChange}
               name="type"
               SelectProps={{

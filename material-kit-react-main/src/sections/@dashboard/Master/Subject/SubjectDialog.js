@@ -42,9 +42,7 @@ const SubjectDialog = () => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">
-                    <h3 className="bg-light p-3 rounded-3">Add Subject</h3>
-                </DialogTitle>
+
                 <DialogContent>
                     <SubjectForm />
                 </DialogContent>

@@ -53,6 +53,8 @@ const Course = [
 ];
 
 const UserForm = () => {
+  // const [state, setState] = useState({ date: new Date() });
+
   const [data, setdata] = useState('');
 
   useEffect(() => {
@@ -64,7 +66,35 @@ const UserForm = () => {
     return () => ValidatorForm.removeValidationRule('isPasswordMatch');
   }, [data.password]);
 
-  // const handleDateChange = (date) => setState({ ...state, date });
+  const handleChange = (e) => {
+    e.persist();
+    // setdata({ ...data, [e.target.name]: e.target.value });
+    if (e.target.name === 'course') {
+      const mydata = data.hobbies;
+
+      if (e.target.select) {
+        mydata.push(e.target.value);
+        setdata({ ...data, hobbies: mydata });
+      } else {
+        const mydata1 = mydata.filter((val) => {
+          return val !== e.target.value;
+        });
+        setdata({ ...data, hobbies: mydata1 });
+      }
+    } else {
+      setdata({ ...data, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    console.log(data);
+    e.preventDefault();
+    // --------------------------API----------------------------
+    axios.post('', data).then((r) => {
+      console.log(r.data);
+      toast('Registration successfully..');
+    });
+  };
 
   const {
     name,
@@ -84,50 +114,6 @@ const UserForm = () => {
     leadsource,
   } = data;
 
-  // -------------------------------------------------------------------------------------------
-
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-      if (value !== data.password) return false;
-
-      return true;
-    });
-    return () => ValidatorForm.removeValidationRule('isPasswordMatch');
-  }, [data.password]);
-
-  // -------------------------------------------------------------------------------------------
-
-  const handleChange = (e) => {
-    e.persist();
-    // setdata({ ...data, [e.target.name]: e.target.value });
-    if (e.target.name === 'course') {
-      const mydata = data.course;
-
-      if (e.target.checked) {
-        mydata.push(e.target.value);
-        setdata({ ...data, course: mydata });
-      } else {
-        const mydata1 = mydata.filter((val) => {
-          return val !== e.target.value;
-        });
-        setdata({ ...data, course: mydata1 });
-      }
-    } else {
-      setdata({ ...data, [e.target.name]: e.target.value });
-    }
-  };
-  // -------------------------------------------------------------------------------------------
-
-  const handleSubmit = (e) => {
-    console.log(data);
-    e.preventDefault();
-    // --------------------------API----------------------------
-    // axios.post('', data).then((r) => {
-    //   console.log(r.data);
-    //   toast('Registration successfully..');
-    // });
-  };
-
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null} autocomplete="off">
@@ -141,7 +127,7 @@ const UserForm = () => {
               type="text"
               name="name"
               id="standard-basic"
-              value={name || ''}
+              value={data.name || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
               label="Student Name "
@@ -153,7 +139,7 @@ const UserForm = () => {
               name="parentsname"
               label="Parents Name"
               onChange={handleChange}
-              value={parentsname || ''}
+              value={data.parentsname || ''}
               validators={['required']}
               errorMessages={['this field is required']}
             />
@@ -162,31 +148,36 @@ const UserForm = () => {
               label="Birth Date"
               InputLabelProps={{ shrink: true }}
               type="date"
-              value={birthdate || ''}
+              value={data.birthdate || ''}
               onChange={handleChange}
               errorMessages={['this field is required']}
             />
             <TextField
               type="text"
               name="education"
-              value={education || ''}
+              value={data.education || ''}
               label="Education"
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
             />
-            <RadioGroup row name="gender" sx={{ mb: 2 }} value={gender || ''} onChange={handleChange}>
-              <FormControlLabel value="Male" label="Male" labelPlacement="end" control={<Radio color="secondary" />} />
+            <RadioGroup row name="gender" sx={{ mb: 2 }} value={data.gender || ''} onChange={handleChange}>
+              <FormControlLabel
+                value="data.Male"
+                label="Male"
+                labelPlacement="end"
+                control={<Radio color="secondary" />}
+              />
 
               <FormControlLabel
-                value="Female"
+                value="data.Female"
                 label="Female"
                 labelPlacement="end"
                 control={<Radio color="secondary" />}
               />
 
               <FormControlLabel
-                value="Others"
+                value="data.Others"
                 label="Others"
                 labelPlacement="end"
                 control={<Radio color="secondary" />}
@@ -203,7 +194,7 @@ const UserForm = () => {
               type="email"
               name="email"
               label="Email"
-              value={email || ''}
+              value={data.email || ''}
               onChange={handleChange}
               validators={['required', 'isEmail']}
               errorMessages={['this field is required', 'email is not valid']}
@@ -211,7 +202,7 @@ const UserForm = () => {
             <TextField
               type="text"
               name="studentmobile"
-              value={studentmobile || ''}
+              value={data.studentmobile || ''}
               label="Student Mobile Nubmer"
               onChange={handleChange}
               validators={['required']}
@@ -220,7 +211,7 @@ const UserForm = () => {
             <TextField
               type="text"
               name="parentmobile"
-              value={parentmobile || ''}
+              value={data.parentmobile || ''}
               label="Parent Mobile Nubmer"
               onChange={handleChange}
               validators={['required']}
@@ -229,7 +220,7 @@ const UserForm = () => {
             <TextField
               type="text"
               name="whatsapp"
-              value={whatsapp || ''}
+              value={data.whatsapp || ''}
               label="Whatsapp Nubmer"
               onChange={handleChange}
               validators={['required']}
@@ -241,7 +232,7 @@ const UserForm = () => {
               // rows={2}
               // maxRows={4}
               name="address"
-              value={address || ''}
+              value={data.address || ''}
               label="Address"
               onChange={handleChange}
               validators={['required']}
@@ -260,7 +251,7 @@ const UserForm = () => {
             <TextField
               type="text"
               name="city"
-              value={city || ''}
+              value={data.city || ''}
               label="City"
               onChange={handleChange}
               validators={['required']}
@@ -279,7 +270,7 @@ const UserForm = () => {
               label="Enquiry Date"
               InputLabelProps={{ shrink: true }}
               type="date"
-              value={enquirydate || ''}
+              value={data.enquirydate || ''}
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
@@ -289,7 +280,7 @@ const UserForm = () => {
               label="Taken By"
               select
               variant="filled"
-              value={takenby || ''}
+              value={data.takenby || ''}
               helperText="Please Select your taken BY"
               onChange={handleChange}
               name="takenby"
@@ -307,7 +298,7 @@ const UserForm = () => {
             <TextField
               label="Lead Source "
               select
-              value={leadsource || ''}
+              value={data.leadsource || ''}
               variant="filled"
               helperText="Please Select your lead source"
               onChange={handleChange}

@@ -7,9 +7,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import DialogTitle from '@mui/material/DialogTitle';
-import FeesForm from './FeesForm';
+import QuestiontypeForm from './QuestiontypeForm';
 
-const FeesDialog = () => {
+const QuestiontypeDialog = () => {
     const [open, setOpen] = React.useState(false);
     const nav = useNavigate()
 
@@ -44,7 +44,7 @@ const FeesDialog = () => {
             >
 
                 <DialogContent>
-                    <FeesForm />
+                    <QuestiontypeForm />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>
@@ -56,6 +56,7 @@ const FeesDialog = () => {
     );
 }
 
-export default FeesDialog;
+export default QuestiontypeDialog;
+
 
 
