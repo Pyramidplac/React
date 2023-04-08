@@ -18,8 +18,6 @@ import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import CheckIcon from '@mui/icons-material/Check';
-import CancelIcon from '@mui/icons-material/Cancel';
-import Multiselect from 'multiselect-react-dropdown';
 
 const TextField = styled(TextValidator)(() => ({
   width: '100%',
@@ -53,6 +51,8 @@ const Course = [
 ];
 
 const UserForm = () => {
+  // const [state, setState] = useState({ date: new Date() });
+
   const [data, setdata] = useState('');
 
   useEffect(() => {
@@ -93,24 +93,6 @@ const UserForm = () => {
       toast('Registration successfully..');
     });
   };
-
-  const {
-    name,
-    parentsname,
-    studentmobile,
-    parentmobile,
-    email,
-    birthdate,
-    gender,
-    whatsapp,
-    education,
-    address,
-    city,
-    enquirydate,
-    takenby,
-    course = [],
-    leadsource,
-  } = data;
 
   return (
     <div>
