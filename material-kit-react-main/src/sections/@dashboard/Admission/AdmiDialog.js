@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AdmiForm from './AdmiForm';
 
-export default function AdmiDialog() {
+export default function AdmiDialog(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -35,7 +35,7 @@ export default function AdmiDialog() {
           <DialogTitle id="alert-dialog-title">{'Admission'}</DialogTitle>
         </DialogTitle>
         <DialogContent>
-          <AdmiForm />
+          <AdmiForm changeEdit={props.changeEdit} />
         </DialogContent>
         <DialogActions>
           <Button className="btn btn-outline-danger" onClick={handleClose}>

@@ -38,11 +38,8 @@ const Course = [
   'Tally+CCC-10500',
 ];
 
-const AdmiForm = () => {
+const AdmiForm = (props) => {
   const [data, setdata] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
     name: '',
     batch: '',
     medium: '',
@@ -54,6 +51,11 @@ const AdmiForm = () => {
     invoice: '',
     admission: '',
     academicYear: '',
+  });
+  const [data1, setdata1] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   useEffect(() => {
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
@@ -75,7 +77,10 @@ const AdmiForm = () => {
     // --------------------------API----------------------------
     axios.post('http://localhost:9999/api/admission', data).then((r) => {
       console.log(r.data);
-      toast('Registration successfully..');
+      props.changeEdit(r.data._id);
+    });
+    axios.post('http://localhost:9999/api/signup', data1).then((r) => {
+      console.log(r.data);
     });
     setdata((e.target.value = ''));
   };

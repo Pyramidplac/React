@@ -29,23 +29,31 @@ import AdmiDialog from '../sections/@dashboard/Admission/AdmiDialog';
 
 export default function UserPage() {
   const [rows, setrow] = useState([]);
+  const [edit, setEdit] = useState(-1);
   const [columns, setcol] = useState([
     { field: 'id', headerName: 'ID', width: 10 },
-    { field: 'name', headerName: 'First name', width: 130 },
-    { field: 'username', headerName: 'Username', width: 150 },
-    { field: 'email', headerName: 'Email', width: 200 },
-    {
-      field: 'phone',
-      headerName: 'Phone',
-      type: 'number',
-      width: 150,
-    },
+    { field: 'name', headerName: 'Student name', width: 130 },
+    { field: 'batch', headerName: 'Batch', width: 150 },
+    { field: 'medium', headerName: 'Medium', width: 100 },
+    { field: 'course', headerName: 'Course', width: 150 },
+    { field: 'startD', headerName: 'Start Date', width: 150 },
+    { field: 'endD', headerName: 'End Date', width: 150 },
+    { field: 'takenby', headerName: 'Taken BY', width: 150 },
+    { field: 'rollNO', headerName: 'Roll No', width: 80 },
+    { field: 'invoice', headerName: 'Invoice', width: 80 },
+    { field: 'admission', headerName: 'Admission Date', width: 150 },
+    { field: 'academicYear', headerName: 'Academic Year', width: 130 }
   ]);
   useEffect(() => {
-    fetch('http://localhost:2103/users')
-      .then((y) => y.json())
-      .then((y) => setrow(y.data));
-  }, [rows]);
+    axios.get('http://localhost:9999/api/admission').then((r) => {
+      const d = r.data.map((value, index) => {
+        value.id = index + 1;
+        return value;
+      });
+      setrow(d);
+      console.log(r);
+    });
+  }, [edit]);
 
   return (
     <>
@@ -58,7 +66,7 @@ export default function UserPage() {
           <Typography variant="h4" gutterBottom>
             Admission
           </Typography>
-          <AdmiDialog />
+          <AdmiDialog changeEdit={setEdit} />
         </Stack>
 
         <Card
