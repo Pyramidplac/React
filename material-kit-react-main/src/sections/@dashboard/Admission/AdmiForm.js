@@ -73,7 +73,7 @@ const AdmiForm = () => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('', data).then((r) => {
+    axios.post('http://localhost:9999/api/admission', data).then((r) => {
       console.log(r.data);
       toast('Registration successfully..');
     });

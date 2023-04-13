@@ -50,7 +50,7 @@ const Course = [
   'Tally+CCC-10500',
 ];
 
-const UserForm = () => {
+const UserForm = (props) => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
@@ -104,10 +104,12 @@ const UserForm = () => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('', data).then((r) => {
-      console.log(r.data);
-      toast('Registration successfully..');
+    axios.post('http://localhost:9999/api/enquiry', data).then((r) => {
+      console.log('Registration successfully..');
+      props.changeEdit(r.data._id);
+
     });
+
     setdata((e.target.value = ''));
   };
 
@@ -160,21 +162,21 @@ const UserForm = () => {
             />
             <RadioGroup row name="gender" sx={{ mb: 2 }} value={data.gender || ''} onChange={handleChange}>
               <FormControlLabel
-                value="data.Male"
+                value="Male"
                 label="Male"
                 labelPlacement="end"
                 control={<Radio color="secondary" />}
               />
 
               <FormControlLabel
-                value="data.Female"
+                value="Female"
                 label="Female"
                 labelPlacement="end"
                 control={<Radio color="secondary" />}
               />
 
               <FormControlLabel
-                value="data.Others"
+                value="Others"
                 label="Others"
                 labelPlacement="end"
                 control={<Radio color="secondary" />}
@@ -223,7 +225,7 @@ const UserForm = () => {
               validators={['required']}
               errorMessages={['this field is required']}
             />
-            <TextField
+            {/* <TextField
               placeholder="Address"
               multiline
               // rows={2}
@@ -234,7 +236,7 @@ const UserForm = () => {
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
-            />
+            /> */}
             <TextareaAutosize
               name="address"
               aria-label="empty textarea"

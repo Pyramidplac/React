@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import UserForm from './UserForm';
 
-export default function UserDialog() {
+export default function UserDialog(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -26,6 +26,7 @@ export default function UserDialog() {
       <Dialog
         open={open}
         onClose={handleClose}
+
         // fullScreen
         fullWidth
         maxWidth="lg"
@@ -34,7 +35,7 @@ export default function UserDialog() {
       >
         <DialogTitle id="alert-dialog-title">{'Student/Trainee/Lead Info'}</DialogTitle>
         <DialogContent>
-          <UserForm />
+          <UserForm changeEdit={props.changeEdit} />
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="secondary" onClick={handleClose}>

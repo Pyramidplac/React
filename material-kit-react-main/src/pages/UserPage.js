@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
@@ -28,22 +29,32 @@ import UserDialog from '../sections/@dashboard/user/UserDialog';
 
 export default function UserPage() {
   const [rows, setrow] = useState([]);
+  const [edit, setEdit] = useState(-1);
   const [columns, setcol] = useState([
-    { field: 'name', headerName: 'First name', width: 130 },
-    { field: 'username', headerName: 'Username', width: 150 },
+    // { field: '_id', headerName: 'First name', width: 130 },
+    { field: 'name', headerName: 'Student name', width: 130 },
+    { field: 'studentmobile', headerName: 'Mobile No', width: 150 },
     { field: 'email', headerName: 'Email', width: 200 },
-    {
-      field: 'phone',
-      headerName: 'Phone',
-      type: 'number',
-      width: 150,
-    },
+    { field: 'whatsapp', headerName: 'Whatsapp No', width: 150 },
+    { field: 'education', headerName: 'Education', width: 150 },
+    { field: 'enquirydate', headerName: 'Enquiry Date', width: 200 },
+    { field: 'takenby', headerName: 'Taken By', width: 200 },
+    { field: 'course', headerName: 'Course', width: 200 },
+    { field: 'leadsource', headerName: 'Lead Source', width: 150 },
+
   ]);
+
+
   useEffect(() => {
-    fetch('http://localhost:2103/users')
-      .then((y) => y.json())
-      .then((y) => setrow(y.data));
-  }, [rows]);
+    axios.get('http://localhost:9999/api/enquiry').then((r) => {
+      const d = r.data.map((value, index) => {
+        value.id = index + 1;
+        return value;
+      });
+      setrow(d);
+      console.log(r);
+    });
+  }, [edit]);
 
   return (
     <>
@@ -56,7 +67,7 @@ export default function UserPage() {
           <Typography variant="h4" gutterBottom>
             Student/Trainee/Lead Info
           </Typography>
-          <UserDialog />
+          <UserDialog changeEdit={setEdit} />
         </Stack>
         <Card
           style={{ height: 500, width: '100%', backgroundColor: '#ffffff' }}
