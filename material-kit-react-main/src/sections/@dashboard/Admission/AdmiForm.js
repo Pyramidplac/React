@@ -40,6 +40,8 @@ const Course = [
 
 const AdmiForm = (props) => {
   const [data, setdata] = useState({
+    email: '',
+    password: '',
     name: '',
     batch: '',
     medium: '',
@@ -52,11 +54,7 @@ const AdmiForm = (props) => {
     admission: '',
     academicYear: '',
   });
-  const [data1, setdata1] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+
   useEffect(() => {
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
       if (value !== data.password) return false;
@@ -75,12 +73,10 @@ const AdmiForm = (props) => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
+
     axios.post('http://localhost:9999/api/admission', data).then((r) => {
       console.log(r.data);
       props.changeEdit(r.data._id);
-    });
-    axios.post('http://localhost:9999/api/signup', data1).then((r) => {
-      console.log(r.data);
     });
     setdata((e.target.value = ''));
   };
@@ -89,7 +85,7 @@ const AdmiForm = (props) => {
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null} autocomplete="off">
         <Grid container spacing={8}>
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }} autocomplete="off">
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
               Student Log-in Details
             </h4>
@@ -100,7 +96,6 @@ const AdmiForm = (props) => {
               value={data.email || ''}
               onChange={handleChange}
               validators={['required', 'isEmail']}
-              autoComplete="off"
               errorMessages={['this field is required', 'email is not valid']}
             />
             <TextField
@@ -112,15 +107,23 @@ const AdmiForm = (props) => {
               validators={['required']}
               errorMessages={['this field is required']}
             />
-            <TextField
-              type="password"
-              name="confirmPassword"
+            {/* <TextField
+              label="Roles "
+              select
+              value={data.roles || ''}
+              variant="filled"
               onChange={handleChange}
-              label="Confirm Password"
-              value={data.confirmPassword || ''}
-              validators={['required', 'isPasswordMatch']}
-              errorMessages={['this field is required', "password didn't match"]}
-            />
+              name="roles"
+              SelectProps={{
+                native: 'true',
+              }}
+            >
+              <option />
+              <option> Student</option>
+              <option> Faculty</option>
+              <option> Admin</option>
+            </TextField> */}
+
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
@@ -176,6 +179,7 @@ const AdmiForm = (props) => {
             </h4>
             {/* ================================================================== */}
 
+
             <Autocomplete
               multiple
               id="tags-standard"
@@ -188,7 +192,7 @@ const AdmiForm = (props) => {
                   {selected ? <CheckIcon color="info" /> : null}
                 </MenuItem>
               )}
-              onChange={handleChange}
+              onChange={(event, value) => setdata({ ...data, course: value })} // prints the selected value
               renderInput={(params) => <TextField {...params} variant="outlined" />}
             />
 

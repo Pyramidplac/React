@@ -22,22 +22,30 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material';
+import axios from 'axios';
 
 import CourseDialog from '../sections/@dashboard/Master/Course/CourseDialog';
 
 export default function Course() {
   const [rows, setrow] = useState([]);
+  const [edit, setEdit] = useState(-1);
   const [columns, setcol] = useState([
-    { field: 'id', headerName: 'ID', width: 10 },
-    { field: 'name', headerName: 'Course', width: 350 },
-    { field: 'username', headerName: 'Course Fees', width: 200 },
-    { field: 'email', headerName: 'Course Type', width: 200 },
+    { field: 'course', headerName: 'Course Name', width: 200 },
+    { field: 'coursefees', headerName: 'Course Fees', width: 200 },
+    { field: 'year', headerName: 'Academic Year', width: 200 },
+    { field: 'type', headerName: 'Course Type', width: 200 },
   ]);
+
   useEffect(() => {
-    fetch('http://localhost:2103/users')
-      .then((y) => y.json())
-      .then((y) => setrow(y.data));
-  }, [rows]);
+    axios.get('http://localhost:9999/api/course').then((r) => {
+      const d = r.data.map((value, index) => {
+        value.id = index + 1;
+        return value;
+      });
+      setrow(d);
+      console.log(r);
+    });
+  }, [edit]);
 
   return (
     <>
@@ -50,7 +58,7 @@ export default function Course() {
           <Typography variant="h4" gutterBottom>
             Course
           </Typography>
-          <CourseDialog />
+          <CourseDialog changeEdit={setEdit} />
         </Stack>
         <Card
           style={{ height: 500, width: '100%', backgroundColor: '#ffffff' }}

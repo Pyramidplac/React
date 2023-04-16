@@ -11,7 +11,7 @@ const TextField = styled(TextValidator)(() => ({
   marginBottom: '16px',
 }));
 
-const CourseForm = () => {
+const CourseForm = (props) => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
@@ -29,9 +29,9 @@ const CourseForm = () => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('', data).then((r) => {
+    axios.post('http://localhost:9999/api/course', data).then((r) => {
       console.log(r.data);
-      toast('Registration successfully..');
+      props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
   };

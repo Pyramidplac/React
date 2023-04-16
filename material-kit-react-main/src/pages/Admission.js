@@ -1,37 +1,85 @@
-import { Helmet } from 'react-helmet-async';
-import { DataGrid } from '@mui/x-data-grid';
+import * as React from 'react';
 import { useEffect, useState } from 'react';
-
-// @mui
+import Swal from 'sweetalert2';
+import PropTypes from 'prop-types';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
+import axios from 'axios';
+import { GridRowModes, DataGridPro, GridToolbarContainer, GridActionsCellItem } from '@mui/x-data-grid-pro';
 import {
   Card,
-  Table,
-  Stack,
-  Paper,
-  Avatar,
-  Button,
-  Popover,
-  Checkbox,
-  TableRow,
-  MenuItem,
-  TableBody,
-  TableCell,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Stack,
   Typography,
-  IconButton,
-  TableContainer,
-  TablePagination,
 } from '@mui/material';
-// components
-
-import axios from 'axios';
+import { DataGrid } from '@mui/x-data-grid';
 import AdmiDialog from '../sections/@dashboard/Admission/AdmiDialog';
+import AdmiEditForm from '../sections/@dashboard/Admission/AdmiEditForm';
 
-export default function UserPage() {
-  const [rows, setrow] = useState([]);
+function EditToolbar(props) {
+  const { setRows, setRowModesModel } = props;
+}
+
+EditToolbar.propTypes = {
+  setRowModesModel: PropTypes.func.isRequired,
+  setRows: PropTypes.func.isRequired,
+};
+
+export default function Admission() {
+  const [rows, setRows] = useState([]);
   const [edit, setEdit] = useState(-1);
-  const [columns, setcol] = useState([
-    { field: 'id', headerName: 'ID', width: 10 },
+
+  const [rowModesModel, setRowModesModel] = React.useState({});
+  // ========================================================
+  const [open, setOpen] = React.useState(false);
+  const handleEditClick = (id) => () => {
+    setOpen(true);
+  };
+  const handleEditClose = () => {
+    setOpen(false);
+  };
+  // ========================================================
+
+  const handleSaveClick = (id) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+  };
+
+  const handleDeleteClick = (id) => () => {
+    Swal.fire({
+      title: 'Do you want to Delete?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Delete!', '', 'success');
+        setRows(rows.filter((row) => row.id !== id));
+      }
+    });
+  };
+
+  const handleCancelClick = (id) => () => {
+    setRowModesModel({
+      ...rowModesModel,
+      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+    });
+
+    const editedRow = rows.find((row) => row.id === id);
+    if (editedRow.isNew) {
+      setRows(rows.filter((row) => row.id !== id));
+    }
+  };
+  const columns = [
     { field: 'name', headerName: 'Student name', width: 130 },
     { field: 'batch', headerName: 'Batch', width: 150 },
     { field: 'medium', headerName: 'Medium', width: 100 },
@@ -42,24 +90,56 @@ export default function UserPage() {
     { field: 'rollNO', headerName: 'Roll No', width: 80 },
     { field: 'invoice', headerName: 'Invoice', width: 80 },
     { field: 'admission', headerName: 'Admission Date', width: 150 },
-    { field: 'academicYear', headerName: 'Academic Year', width: 130 }
-  ]);
+    { field: 'academicYear', headerName: 'Academic Year', width: 130 },
+
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      width: 100,
+      cellClassName: 'actions',
+      getActions: ({ id }) => {
+        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+
+        if (isInEditMode) {
+          return [
+            <GridActionsCellItem icon={<SaveIcon />} label="Save" onClick={handleSaveClick(id)} />,
+            <GridActionsCellItem
+              icon={<CancelIcon />}
+              label="Cancel"
+              className="textPrimary"
+              onClick={handleCancelClick(id)}
+              color="inherit"
+            />,
+          ];
+        }
+
+        return [
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            className="textPrimary"
+            onClick={handleEditClick(id)}
+            color="inherit"
+          />,
+          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(id)} color="inherit" />,
+        ];
+      },
+    },
+  ];
   useEffect(() => {
     axios.get('http://localhost:9999/api/admission').then((r) => {
       const d = r.data.map((value, index) => {
         value.id = index + 1;
         return value;
       });
-      setrow(d);
-      console.log(r);
+      setRows(d);
     });
   }, [edit]);
 
   return (
     <>
-      <Helmet>
-        <title> Shital Academy Vadodara </title>
-      </Helmet>
+
 
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -68,6 +148,31 @@ export default function UserPage() {
           </Typography>
           <AdmiDialog changeEdit={setEdit} />
         </Stack>
+
+        {/* ==================(edit popop)======================================== */}
+        <Dialog
+          open={open}
+          onClose={handleEditClose}
+          // fullScreen
+          fullWidth
+          maxWidth="lg"
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Let Google help apps determine location. This means sending anonymous location data to Google, even when
+              no apps are running.
+            </DialogContentText>
+            <AdmiEditForm />
+          </DialogContent>
+          <DialogActions>
+            <Button variant="outlined" color="secondary" onClick={handleEditClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
 
         <Card
           style={{ height: 500, width: '100%', backgroundColor: '#ffffff' }}

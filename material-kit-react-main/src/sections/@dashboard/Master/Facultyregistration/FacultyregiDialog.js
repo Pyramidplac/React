@@ -7,11 +7,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DialogTitle from '@mui/material/DialogTitle';
-import CourseForm from './CourseForm';
+import FacultyregistrationForm from './FacultyregistrationForm';
 
-const CourseDialog = (props) => {
+const FacultyregiDialog = () => {
     const [open, setOpen] = React.useState(false);
-    const nav = useNavigate()
+    const nav = useNavigate();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -22,12 +22,12 @@ const CourseDialog = (props) => {
     };
 
     const backhome = () => {
-        nav("/dashboard/master")
+        nav('/dashboard/master');
     };
 
     return (
         <div>
-            <Button variant="contained" onClick={backhome} className='me-3'>
+            <Button variant="contained" onClick={backhome} className="me-3">
                 <ArrowBackIcon />
             </Button>
             <Button variant="contained" onClick={handleClickOpen}>
@@ -38,13 +38,12 @@ const CourseDialog = (props) => {
                 onClose={handleClose}
                 // fullScreen
                 fullWidth
-                maxWidth='sm'
+                maxWidth="sm"
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-
                 <DialogContent>
-                    <CourseForm changeEdit={props.changeEdit} />
+                    <FacultyregistrationForm />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>
@@ -54,7 +53,6 @@ const CourseDialog = (props) => {
             </Dialog>
         </div>
     );
-}
+};
 
-export default CourseDialog;
-
+export default FacultyregiDialog;

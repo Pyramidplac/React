@@ -65,7 +65,7 @@ const UserForm = (props) => {
     education: '',
     address: '',
     city: '',
-    enquirydate: '',
+    inquirydate: '',
     takenby: '',
     course: [],
     leadsource: '',
@@ -104,7 +104,7 @@ const UserForm = (props) => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('http://localhost:9999/api/enquiry', data).then((r) => {
+    axios.post('http://localhost:9999/api/inquiry', data).then((r) => {
       console.log('Registration successfully..');
       props.changeEdit(r.data._id);
 
@@ -262,14 +262,14 @@ const UserForm = (props) => {
 
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <h4 className=" p-2 rounded-2 mb-3" style={{ backgroundColor: '#e8f0fe' }}>
-              Enquiry Details
+              Inquiry Details
             </h4>
             <TextField
-              name="enquirydate"
-              label="Enquiry Date"
+              name="inquirydate"
+              label="Inquiry Date"
               InputLabelProps={{ shrink: true }}
               type="date"
-              value={data.enquirydate || ''}
+              value={data.inquirydate || ''}
               onChange={handleChange}
               validators={['required']}
               errorMessages={['this field is required']}
@@ -317,19 +317,18 @@ const UserForm = (props) => {
             </TextField>
 
             <Autocomplete
-              name="course"
               multiple
               id="tags-standard"
-              helperText="Please Select your lead source"
               options={Course}
               getOptionLabel={(option) => option}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => (
-                <MenuItem key={option} value={option} sx={{ justifyContent: 'space-between' }} {...props}>
+                <MenuItem key={option} value={data.option} sx={{ justifyContent: 'space-between' }} {...props}>
                   {option}
                   {selected ? <CheckIcon color="info" /> : null}
                 </MenuItem>
               )}
+              onChange={(event, value) => setdata({ ...data, course: value })} // prints the selected value
               renderInput={(params) => <TextField {...params} variant="outlined" />}
             />
           </Grid>

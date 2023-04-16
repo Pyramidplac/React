@@ -24,6 +24,9 @@ const Master = () => {
     const takenby = () => {
         myNav("/takenby")
     }
+    const facultyregistration = () => {
+        myNav('/facultyregistration');
+    };
     return (
         <>
             <Helmet>
@@ -73,8 +76,13 @@ const Master = () => {
                             <span> Taken By</span>
                         </Button>
                     </div>
-
-
+                </div>
+                <div className="row mt-3">
+                    <div className="col-sm-4">
+                        <Button color="primary" variant="contained" type="submit" onClick={facultyregistration} fullWidth>
+                            <span> Faculty Registration</span>
+                        </Button>
+                    </div>
                 </div>
 
 

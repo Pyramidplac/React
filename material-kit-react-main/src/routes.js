@@ -19,6 +19,7 @@ import CoursePage from './pages/CoursePage';
 import Questiontype from './pages/Questiontype';
 import AcademicYear from './pages/AcademicYear';
 import TakenBy from './pages/TakenBy';
+import Facultyregistration from './pages/Facultyregistration';
 
 // ----------------------------------------------------------------------
 
@@ -69,6 +70,10 @@ export default function Router() {
     {
       path: 'takenby',
       element: <TakenBy />,
+    },
+    {
+      path: 'facultyregistration',
+      element: <Facultyregistration />,
     },
     // ----------------------------------------------
     {
