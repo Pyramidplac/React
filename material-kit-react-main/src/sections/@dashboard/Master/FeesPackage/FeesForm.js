@@ -1,19 +1,21 @@
-import { Button, Checkbox, FormControlLabel, Grid, Icon, Radio, RadioGroup, styled } from '@mui/material';
+import { Autocomplete, Button, Checkbox, FormControlLabel, Grid, Icon, MenuItem, Radio, RadioGroup, styled } from '@mui/material';
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import CheckIcon from '@mui/icons-material/Check';
+
 
 const TextField = styled(TextValidator)(() => ({
   width: '100%',
   marginBottom: '16px',
 }));
 
-const FeesForm = () => {
+const FeesForm = (props) => {
   // const [state, setState] = useState({ date: new Date() });
-
+  // const [course, setcourse] = useState([]);
   const [data, setdata] = useState({
     feesmaster: '',
     amountmaster: '',
@@ -29,12 +31,21 @@ const FeesForm = () => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('', data).then((r) => {
-      console.log(r.data);
-      toast('Registration successfully..');
+    axios.post('http://localhost:9999/api/fees', data).then((r) => {
+      props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
   };
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:9999/api/course').then((r) => {
+  //     const d = r.data.map((value, index) => {
+  //       value.id = index + 1;
+  //       return value;
+  //     });
+  //     setcourse(d);
+  //   });
+  // })
 
   // const handleDateChange = (date) => setState({ ...state, date });
 
@@ -56,6 +67,21 @@ const FeesForm = () => {
               label="Fees Package Title* "
               validators={['required']}
             />
+            {/* <Autocomplete
+              multiple
+              id="tags-standard"
+              options={course.course}
+              getOptionLabel={(option) => option}
+              disableCloseOnSelect
+              renderOption={(props, option, { selected }) => (
+                <MenuItem key={option} value={data.option} sx={{ justifyContent: 'space-between' }} {...props}>
+                  {option}
+                  {selected ? <CheckIcon color="info" /> : null}
+                </MenuItem>
+              )}
+              onChange={(event, value) => setdata({ ...data, feesmaster: value })} // prints the selected value
+              renderInput={(params) => <TextField {...params} variant="outlined" />}
+            /> */}
 
             <TextField
               type="number"

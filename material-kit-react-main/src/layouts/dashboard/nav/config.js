@@ -46,8 +46,8 @@ const navConfig = [
     icon: <QuestionAnswerIcon />,
   },
   {
-    title: 'course',
-    path: '/dashboard/course',
+    title: 'Online Inquiry',
+    path: '/dashboard/onlineinquiry',
     icon: <ImportContactsIcon />,
   },
   {

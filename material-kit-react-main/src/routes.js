@@ -15,11 +15,11 @@ import Master from './pages/Master';
 import Course from './pages/Course';
 import FeesPackage from './pages/FeesPackage';
 import Subject from './pages/Subject';
-import CoursePage from './pages/CoursePage';
 import Questiontype from './pages/Questiontype';
 import AcademicYear from './pages/AcademicYear';
 import TakenBy from './pages/TakenBy';
 import Facultyregistration from './pages/Facultyregistration';
+import OnlineInquiry from './pages/OnlineInquiry';
 
 // ----------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ export default function Router() {
         { path: 'admission', element: <Admission /> },
         { path: 'master', element: <Master /> },
         { path: 'question', element: <Questionpage /> },
-        { path: 'course', element: <CoursePage /> },
+        { path: 'onlineinquiry', element: <OnlineInquiry /> },
         { path: 'blog', element: <BlogPage /> },
       ],
     },

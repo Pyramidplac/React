@@ -1,56 +1,163 @@
-import { Helmet } from 'react-helmet-async';
+import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-
-// @mui
+import Swal from 'sweetalert2';
+import PropTypes from 'prop-types';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
+import axios from 'axios';
+import { GridRowModes, DataGridPro, GridToolbarContainer, GridActionsCellItem } from '@mui/x-data-grid-pro';
+import { randomCreatedDate, randomTraderName, randomUpdatedDate, randomId } from '@mui/x-data-grid-generator';
 import {
   Card,
-  Table,
-  Stack,
-  Paper,
-  Avatar,
-  Button,
-  Popover,
-  Checkbox,
-  TableRow,
-  MenuItem,
-  TableBody,
-  TableCell,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Stack,
   Typography,
-  IconButton,
-  TableContainer,
-  TablePagination,
 } from '@mui/material';
-
+import { DataGrid } from '@mui/x-data-grid';
 import SubjectDialog from '../sections/@dashboard/Master/Subject/SubjectDialog';
+import SubjectEditForm from '../sections/@dashboard/Master/Subject/SubjectEditForm';
 
 export default function Subject() {
-  const [rows, setrow] = useState([]);
+  const [rows, setRows] = useState([]);
+  const [edit, setEdit] = useState(-1);
+
+  const [rowModesModel, setRowModesModel] = React.useState({});
+  // ========================================================
+  const [open, setOpen] = React.useState(false);
+  const handleEditClick = (id) => () => {
+    setOpen(true);
+  };
+  const handleEditClose = () => {
+    setOpen(false);
+  };
+  // ========================================================
+
+  const handleSaveClick = (id) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+  };
+
+  const handleDeleteClick = (id) => () => {
+    Swal.fire({
+      title: 'Do you want to Delete?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Delete!', '', 'success');
+        setRows(rows.filter((row) => row.id !== id));
+      }
+    });
+  };
+
+  const handleCancelClick = (id) => () => {
+    setRowModesModel({
+      ...rowModesModel,
+      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+    });
+
+    const editedRow = rows.find((row) => row.id === id);
+    if (editedRow.isNew) {
+      setRows(rows.filter((row) => row.id !== id));
+    }
+  };
   const [columns, setcol] = useState([
-    { field: 'id', headerName: 'ID', width: 10 },
-    { field: 'name', headerName: 'Subject', width: 350 },
-    { field: 'username', headerName: 'Timeline', width: 350 },
+    { field: 'subject', headerName: 'Subject Name', width: 350 },
+    { field: 'timeline', headerName: 'Timeline', width: 200 },
+    { field: 'category', headerName: 'Category', width: 200 },
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      width: 100,
+      cellClassName: 'actions',
+      getActions: ({ id }) => {
+        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+
+        if (isInEditMode) {
+          return [
+            <GridActionsCellItem icon={<SaveIcon />} label="Save" onClick={handleSaveClick(id)} />,
+            <GridActionsCellItem
+              icon={<CancelIcon />}
+              label="Cancel"
+              className="textPrimary"
+              onClick={handleCancelClick(id)}
+              color="inherit"
+            />,
+          ];
+        }
+
+        return [
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            className="textPrimary"
+            onClick={handleEditClick(id)}
+            color="inherit"
+          />,
+          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(id)} color="inherit" />,
+        ];
+      },
+    },
+
   ]);
   useEffect(() => {
-    fetch('http://localhost:2103/users')
-      .then((y) => y.json())
-      .then((y) => setrow(y.data));
-  }, [rows]);
+    axios.get('http://localhost:9999/api/subject').then((r) => {
+      const d = r.data.map((value, index) => {
+        value.id = index + 1;
+        return value;
+      });
+      setRows(d);
+      console.log(r);
+    });
+  }, [edit]);
 
   return (
     <>
-      <Helmet>
-        <title> Shital Academy Vadodara </title>
-      </Helmet>
+
 
       <Container className="mt-4">
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Subject
           </Typography>
-          <SubjectDialog />
+          <SubjectDialog changeEdit={setEdit} />
         </Stack>
+
+        <Dialog
+          open={open}
+          onClose={handleEditClose}
+          // fullScreen
+          fullWidth
+          maxWidth="lg"
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Let Google help apps determine location. This means sending anonymous location data to Google, even when
+              no apps are running.
+            </DialogContentText>
+            <SubjectEditForm />
+          </DialogContent>
+          <DialogActions>
+            <Button variant="outlined" color="secondary" onClick={handleEditClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+
         <Card
           style={{ height: 500, width: '100%', backgroundColor: '#ffffff' }}
           sx={{ boxShadow: 3, borderRadius: '16px' }}

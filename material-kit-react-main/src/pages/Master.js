@@ -38,11 +38,6 @@ const Master = () => {
                 <Typography variant="h4" sx={{ mb: 5 }}>
                     Master
                 </Typography>
-
-
-
-
-
                 <div className="row">
                     <div className="col-sm-4">
                         <Button color="primary" variant="contained" type="submit" onClick={subjectpage} fullWidth>

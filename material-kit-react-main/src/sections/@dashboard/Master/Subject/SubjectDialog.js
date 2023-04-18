@@ -10,7 +10,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AdmiForm from '../../Admission/AdmiForm';
 import SubjectForm from './SubjectForm';
 
-const SubjectDialog = () => {
+const SubjectDialog = (props) => {
     const [open, setOpen] = React.useState(false);
     const nav = useNavigate()
 
@@ -44,7 +44,7 @@ const SubjectDialog = () => {
             >
 
                 <DialogContent>
-                    <SubjectForm />
+                    <SubjectForm changeEdit={props.changeEdit} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>
