@@ -1,56 +1,153 @@
-import { Helmet } from 'react-helmet-async';
+import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-
-// @mui
+import Swal from 'sweetalert2';
+import PropTypes from 'prop-types';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
+import axios from 'axios';
+import { GridRowModes, DataGridPro, GridToolbarContainer, GridActionsCellItem } from '@mui/x-data-grid-pro';
+import { randomCreatedDate, randomTraderName, randomUpdatedDate, randomId } from '@mui/x-data-grid-generator';
 import {
   Card,
-  Table,
-  Stack,
-  Paper,
-  Avatar,
-  Button,
-  Popover,
-  Checkbox,
-  TableRow,
-  MenuItem,
-  TableBody,
-  TableCell,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Stack,
   Typography,
-  IconButton,
-  TableContainer,
-  TablePagination,
 } from '@mui/material';
-
+import { DataGrid } from '@mui/x-data-grid';
 import AcademicyearDialog from '../sections/@dashboard/Master/AcademicYear/AcademicyearDialog';
+import AcademicYearEditForm from '../sections/@dashboard/Master/AcademicYear/AcademicYearEditForm';
 
 export default function AcademicYear() {
-  const [rows, setrow] = useState([]);
-  const [columns, setcol] = useState([
-    { field: 'id', headerName: 'ID', width: 10 },
-    { field: 'name', headerName: 'Subject', width: 350 },
-    { field: 'username', headerName: 'Timeline', width: 350 },
-  ]);
+  const [rows, setRows] = useState([]);
+
+  const [edit, setEdit] = useState(-1);
+
+  const [rowModesModel, setRowModesModel] = React.useState({});
+  // ========================================================
+  const [open, setOpen] = React.useState(false);
+  const handleEditClick = (id) => () => {
+    setOpen(true);
+  };
+  const handleEditClose = () => {
+    setOpen(false);
+  };
+  // ========================================================
+
+  const handleSaveClick = (id) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+  };
+
+  const handleDeleteClick = (row) => () => {
+    Swal.fire({
+      title: 'Do you want to Delete?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+
+        axios.delete(`http://localhost:9999/api/academicyear/${row.row._id}`).then((r) => {
+          setRows(rows.filter((rowd) => rowd.id !== row.id));
+        });
+      }
+    });
+  };
+
+  const handleCancelClick = (id) => () => {
+    setRowModesModel({
+      ...rowModesModel,
+      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+    });
+
+    const editedRow = rows.find((row) => row.id === id);
+    if (editedRow.isNew) {
+      setRows(rows.filter((row) => row.id !== id));
+    }
+  };
+  const columns = [
+    { field: 'academicyear', headerName: 'Academic Year', width: 300 },
+    { field: 'academicyearfromdate', headerName: 'Year Start Date', width: 300 },
+    { field: 'academicyearenddate', headerName: 'Year End Date', width: 300 },
+
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      width: 100,
+      cellClassName: 'actions',
+      getActions: (row) => {
+
+        console.log(row);
+        return [
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            className="textPrimary"
+            onClick={handleEditClick(row)}
+            color="inherit"
+          />,
+          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(row)} color="inherit" />,
+        ];
+      },
+    },
+  ];
+
   useEffect(() => {
-    fetch('http://localhost:8008/users')
-      .then((y) => y.json())
-      .then((y) => setrow(y.data));
-  }, [rows]);
+    axios.get('http://localhost:9999/api/academicyear').then((r) => {
+      const d = r.data.map((value, index) => {
+        value.id = index + 1;
+        return value;
+      });
+      setRows(d);
+      console.log(r);
+    });
+  }, [edit]);
 
   return (
     <>
-      <Helmet>
-        <title> Shital Academy Vadodara </title>
-      </Helmet>
+
 
       <Container className="mt-4">
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Academic Year
           </Typography>
-          <AcademicyearDialog />
+          <AcademicyearDialog changeEdit={setEdit} />
         </Stack>
+
+        <Dialog
+          open={open}
+          onClose={handleEditClose}
+          // fullScreen
+          fullWidth
+          maxWidth="lg"
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Let Google help apps determine location. This means sending anonymous location data to Google, even when
+              no apps are running.
+            </DialogContentText>
+            <AcademicYearEditForm />
+          </DialogContent>
+          <DialogActions>
+            <Button variant="outlined" color="secondary" onClick={handleEditClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Card
           style={{ height: 500, width: '100%', backgroundColor: '#ffffff' }}
           sx={{ boxShadow: 3, borderRadius: '16px' }}

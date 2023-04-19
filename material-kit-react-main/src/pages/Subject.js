@@ -42,11 +42,9 @@ export default function Subject() {
   };
   // ========================================================
 
-  const handleSaveClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-  };
 
-  const handleDeleteClick = (id) => () => {
+
+  const handleDeleteClick = (row) => () => {
     Swal.fire({
       title: 'Do you want to Delete?',
       showCancelButton: true,
@@ -54,24 +52,16 @@ export default function Subject() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Delete!', '', 'success');
-        setRows(rows.filter((row) => row.id !== id));
+
+        axios.delete(`http://localhost:9999/api/subject/${row.row._id}`).then((r) => {
+          setRows(rows.filter((rowd) => rowd.id !== row.id));
+        });
       }
     });
   };
 
-  const handleCancelClick = (id) => () => {
-    setRowModesModel({
-      ...rowModesModel,
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
-    });
 
-    const editedRow = rows.find((row) => row.id === id);
-    if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.id !== id));
-    }
-  };
-  const [columns, setcol] = useState([
+  const columns = [
     { field: 'subject', headerName: 'Subject Name', width: 350 },
     { field: 'timeline', headerName: 'Timeline', width: 200 },
     { field: 'category', headerName: 'Category', width: 200 },
@@ -81,36 +71,23 @@ export default function Subject() {
       headerName: 'Actions',
       width: 100,
       cellClassName: 'actions',
-      getActions: ({ id }) => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+      getActions: (row) => {
 
-        if (isInEditMode) {
-          return [
-            <GridActionsCellItem icon={<SaveIcon />} label="Save" onClick={handleSaveClick(id)} />,
-            <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className="textPrimary"
-              onClick={handleCancelClick(id)}
-              color="inherit"
-            />,
-          ];
-        }
-
+        console.log(row);
         return [
           <GridActionsCellItem
             icon={<EditIcon />}
             label="Edit"
             className="textPrimary"
-            onClick={handleEditClick(id)}
+            onClick={handleEditClick(row)}
             color="inherit"
           />,
-          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(id)} color="inherit" />,
+          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(row)} color="inherit" />,
         ];
       },
     },
+  ];
 
-  ]);
   useEffect(() => {
     axios.get('http://localhost:9999/api/subject').then((r) => {
       const d = r.data.map((value, index) => {

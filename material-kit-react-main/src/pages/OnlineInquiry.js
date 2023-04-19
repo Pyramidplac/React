@@ -13,7 +13,10 @@ const OnlineInquiry = () => {
 
   const [rowModesModel, setRowModesModel] = React.useState({});
 
-  const handleDeleteClick = (id) => () => {
+
+
+
+  const handleDeleteClick = (row) => () => {
     Swal.fire({
       title: 'Do you want to Delete?',
       showCancelButton: true,
@@ -21,8 +24,10 @@ const OnlineInquiry = () => {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Delete!', '', 'success');
-        setRows(rows.filter((row) => row.id !== id));
+
+        axios.delete(`http://localhost:9999/api/onlineinquiry/${row.row._id}`).then((r) => {
+          setRows(rows.filter((rowd) => rowd.id !== row.id));
+        });
       }
     });
   };
@@ -40,9 +45,11 @@ const OnlineInquiry = () => {
       headerName: 'Actions',
       width: 100,
       cellClassName: 'actions',
-      getActions: ({ id }) => {
+      getActions: (row) => {
+
+        console.log(row);
         return [
-          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(id)} color="inherit" />,
+          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(row)} color="inherit" />,
         ];
       },
     },
@@ -58,6 +65,10 @@ const OnlineInquiry = () => {
       console.log(r);
     });
   }, [edit]);
+
+
+
+
   return (
     <>
       <Container>

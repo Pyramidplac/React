@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import AcademicyearForm from './AcademicyearForm';
 
 
-const AcademicyearDialog = () => {
+const AcademicyearDialog = (props) => {
     const [open, setOpen] = React.useState(false);
     const nav = useNavigate()
 
@@ -45,7 +45,7 @@ const AcademicyearDialog = () => {
             >
 
                 <DialogContent>
-                    <AcademicyearForm />
+                    <AcademicyearForm changeEdit={props.changeEdit} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>
