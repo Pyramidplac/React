@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import QuestionForm from './QuestionForm';
 
-export default function QuestionDialog() {
+export default function QuestionDialog(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -38,7 +38,7 @@ export default function QuestionDialog() {
             Let Google help apps determine location. This means sending anonymous location data to Google, even when no
             apps are running.
           </DialogContentText>
-          <QuestionForm />
+          <QuestionForm changeEdit={props.changeEdit} />
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="secondary" onClick={handleClose}>

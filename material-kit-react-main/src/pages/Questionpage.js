@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -26,17 +26,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import QuestionEditForm from '../sections/@dashboard/Question/QuestionEditForm';
 import QuestionDialog from '../sections/@dashboard/Question/QuestionDialog';
 
-function EditToolbar(props) {
-  const { setRows, setRowModesModel } = props;
-}
 
-EditToolbar.propTypes = {
-  setRowModesModel: PropTypes.func.isRequired,
-  setRows: PropTypes.func.isRequired,
-};
 
 export default function Questionpage() {
   const [rows, setRows] = React.useState('');
+  const [edit, setEdit] = useState(-1);
   const [rowModesModel, setRowModesModel] = React.useState({});
   // ========================================================
   const [open, setOpen] = React.useState(false);
@@ -48,11 +42,9 @@ export default function Questionpage() {
   };
   // ========================================================
 
-  const handleSaveClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-  };
 
-  const handleDeleteClick = (id) => () => {
+
+  const handleDeleteClick = (row) => () => {
     Swal.fire({
       title: 'Do you want to Delete?',
       showCancelButton: true,
@@ -60,38 +52,20 @@ export default function Questionpage() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Delete!', '', 'success');
-        setRows(rows.filter((row) => row.id !== id));
+
+        axios.delete(`http://localhost:9999/api/question/${row.row._id}`).then((r) => {
+          setRows(rows.filter((rowd) => rowd.id !== row.id));
+        });
       }
     });
   };
 
-  const handleCancelClick = (id) => () => {
-    setRowModesModel({
-      ...rowModesModel,
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
-    });
 
-    const editedRow = rows.find((row) => row.id === id);
-    if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.id !== id));
-    }
-  };
-
-  useEffect(() => {
-    axios.get('http://localhost:2103/api/shital').then((r) => {
-      const d = r.data.map((value, index) => {
-        value.id = index + 1;
-        return value;
-      });
-      setRows(d);
-      console.log(r);
-    });
-  }, [rows]);
 
   const columns = [
-    { field: 'question', headerName: 'ID', width: 350 },
-    { field: 'answer', headerName: 'First name', width: 450 },
+    { field: 'qtype', headerName: 'Question type', width: 150 },
+    { field: 'question', headerName: 'Question', width: 350 },
+    { field: 'answer', headerName: 'Answer', width: 350 },
 
     {
       field: 'actions',
@@ -99,43 +73,39 @@ export default function Questionpage() {
       headerName: 'Actions',
       width: 100,
       cellClassName: 'actions',
-      getActions: ({ id }) => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-
-        if (isInEditMode) {
-          return [
-            <GridActionsCellItem icon={<SaveIcon />} label="Save" onClick={handleSaveClick(id)} />,
-            <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className="textPrimary"
-              onClick={handleCancelClick(id)}
-              color="inherit"
-            />,
-          ];
-        }
+      getActions: (row) => {
 
         return [
           <GridActionsCellItem
             icon={<EditIcon />}
             label="Edit"
             className="textPrimary"
-            onClick={handleEditClick(id)}
+            onClick={handleEditClick(row)}
             color="inherit"
           />,
-          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(id)} color="inherit" />,
+          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(row)} color="inherit" />,
         ];
       },
     },
   ];
 
+
+  useEffect(() => {
+    axios.get('http://localhost:9999/api/question').then((r) => {
+      const d = r.data.map((value, index) => {
+        value.id = index + 1;
+        return value;
+      });
+      setRows(d);
+    });
+  }, [edit]);
   return (
     <>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4" gutterBottom>
           Question & Answer
         </Typography>
-        <QuestionDialog />
+        <QuestionDialog changeEdit={setEdit} />
       </Stack>
       {/* ==================(edit popop)======================================== */}
       <Dialog

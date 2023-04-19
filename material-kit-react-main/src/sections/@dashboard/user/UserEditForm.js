@@ -101,11 +101,9 @@ const UserEditForm = (props) => {
     };
 
     const handleSubmit = (e) => {
-        console.log(data);
         e.preventDefault();
         // --------------------------API----------------------------
         axios.post('http://localhost:9999/api/inquiry', data).then((r) => {
-            console.log('Registration successfully..');
             props.changeEdit(r.data._id);
 
         });

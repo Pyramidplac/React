@@ -101,7 +101,6 @@ const UserForm = (props) => {
   };
 
   const handleSubmit = (e) => {
-    console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
     axios.post('http://localhost:9999/api/inquiry', data).then((r) => {
