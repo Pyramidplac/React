@@ -76,7 +76,6 @@ export default function FeesPackage() {
       cellClassName: 'actions',
       getActions: (row) => {
 
-        console.log(row);
         return [
           <GridActionsCellItem
             icon={<EditIcon />}

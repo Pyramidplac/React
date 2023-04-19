@@ -73,7 +73,6 @@ export default function Subject() {
       cellClassName: 'actions',
       getActions: (row) => {
 
-        console.log(row);
         return [
           <GridActionsCellItem
             icon={<EditIcon />}
@@ -95,7 +94,6 @@ export default function Subject() {
         return value;
       });
       setRows(d);
-      console.log(r);
     });
   }, [edit]);
 

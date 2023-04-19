@@ -1,4 +1,6 @@
-import React from 'react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -12,11 +14,29 @@ import SubjectForm from './SubjectForm';
 
 const SubjectDialog = (props) => {
     const [open, setOpen] = React.useState(false);
+    // const [row, setRows] = useState([]);
     const nav = useNavigate()
 
     const handleClickOpen = () => {
         setOpen(true);
     };
+
+    // const handleDeleteClick = (id) => () => {
+    //     Swal.fire({
+    //         title: 'Do you want to Delete?',
+    //         showCancelButton: true,
+    //         confirmButtonText: 'Delete',
+    //     }).then((result) => {
+    //         /* Read more about isConfirmed, isDenied below */
+    //         if (result.isConfirmed) {
+
+    //             axios.delete(`http://localhost:9999/api/subject${id}`).then((r) => {
+
+    //             });
+    //         }
+    //     });
+    // };
+
 
     const handleClose = () => {
         setOpen(false);
@@ -33,6 +53,9 @@ const SubjectDialog = (props) => {
             <Button variant="contained" onClick={handleClickOpen}>
                 Add New
             </Button>
+            {/* <Button variant="contained" className='bg-danger mx-2' onClick={handleDeleteClick(row)}>
+                Delete All
+            </Button> */}
             <Dialog
                 open={open}
                 onClose={handleClose}

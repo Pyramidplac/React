@@ -74,7 +74,6 @@ export default function Course() {
       cellClassName: 'actions',
       getActions: (row) => {
 
-        console.log(row);
         return [
           <GridActionsCellItem
             icon={<EditIcon />}

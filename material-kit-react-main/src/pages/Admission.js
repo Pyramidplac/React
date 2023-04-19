@@ -87,7 +87,6 @@ export default function Admission() {
       cellClassName: 'actions',
       getActions: (row) => {
 
-        console.log(row);
         return [
           <GridActionsCellItem
             icon={<EditIcon />}

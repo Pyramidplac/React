@@ -87,7 +87,6 @@ export default function AcademicYear() {
       cellClassName: 'actions',
       getActions: (row) => {
 
-        console.log(row);
         return [
           <GridActionsCellItem
             icon={<EditIcon />}

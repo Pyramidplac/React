@@ -26,10 +26,9 @@ const SubjectForm = (props) => {
   };
 
   const handleSubmit = (e) => {
-    console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('http://localhost:9999/api/fees', data).then((r) => {
+    axios.post('http://localhost:9999/api/subject', data).then((r) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
