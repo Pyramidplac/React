@@ -45,7 +45,7 @@ const AcademicyearDialog = (props) => {
             >
 
                 <DialogContent>
-                    <AcademicyearForm changeEdit={props.changeEdit} />
+                    <AcademicyearForm changeEdit={props.changeEdit} handleClose={handleClose} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

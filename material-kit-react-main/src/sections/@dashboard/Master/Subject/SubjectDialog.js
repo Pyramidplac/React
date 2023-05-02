@@ -21,7 +21,7 @@ const SubjectDialog = (props) => {
         setOpen(true);
     };
 
-    // const handleDeleteClick = (id) => () => {
+    // const handleDeleteClick = (row) => () => {
     //     Swal.fire({
     //         title: 'Do you want to Delete?',
     //         showCancelButton: true,
@@ -30,12 +30,14 @@ const SubjectDialog = (props) => {
     //         /* Read more about isConfirmed, isDenied below */
     //         if (result.isConfirmed) {
 
-    //             axios.delete(`http://localhost:9999/api/subject${id}`).then((r) => {
+    //             axios.delete('http://localhost:9999/api/subject').then((r) => {
 
     //             });
     //         }
     //     });
     // };
+
+
 
 
     const handleClose = () => {
@@ -67,7 +69,7 @@ const SubjectDialog = (props) => {
             >
 
                 <DialogContent>
-                    <SubjectForm changeEdit={props.changeEdit} />
+                    <SubjectForm changeEdit={props.changeEdit} handleClose={handleClose} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

@@ -44,7 +44,7 @@ const CourseDialog = (props) => {
             >
 
                 <DialogContent>
-                    <CourseForm changeEdit={props.changeEdit} />
+                    <CourseForm changeEdit={props.changeEdit} handleClose={handleClose} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

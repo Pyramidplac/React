@@ -133,7 +133,7 @@ export default function UserPage() {
               Let Google help apps determine location. This means sending anonymous location data to Google, even when
               no apps are running.
             </DialogContentText>
-            <UserEditForm />
+            <UserEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
           </DialogContent>
           <DialogActions>
             <Button variant="outlined" color="secondary" onClick={handleEditClose}>

@@ -51,8 +51,7 @@ const Course = [
 ];
 
 const UserForm = (props) => {
-  // const [state, setState] = useState({ date: new Date() });
-
+  const [open, setOpen] = useState(false);
   const [data, setdata] = useState({
     name: '',
     parentsname: '',
@@ -106,6 +105,7 @@ const UserForm = (props) => {
     axios.post('http://localhost:9999/api/inquiry', data).then((r) => {
       console.log('Registration successfully..');
       props.changeEdit(r.data._id);
+      setOpen(props.handleClose);
 
     });
 
@@ -198,7 +198,7 @@ const UserForm = (props) => {
               errorMessages={['this field is required', 'email is not valid']}
             />
             <TextField
-              type="text"
+              type="number"
               name="studentmobile"
               value={data.studentmobile || ''}
               label="Student Mobile Nubmer"
@@ -207,7 +207,7 @@ const UserForm = (props) => {
               errorMessages={['this field is required']}
             />
             <TextField
-              type="text"
+              type="number"
               name="parentmobile"
               value={data.parentmobile || ''}
               label="Parent Mobile Nubmer"
@@ -216,7 +216,7 @@ const UserForm = (props) => {
               errorMessages={['this field is required']}
             />
             <TextField
-              type="text"
+              type="number"
               name="whatsapp"
               value={data.whatsapp || ''}
               label="Whatsapp Nubmer"

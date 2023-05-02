@@ -123,7 +123,7 @@ export default function Questionpage() {
             Let Google help apps determine location. This means sending anonymous location data to Google, even when no
             apps are running.
           </DialogContentText>
-          <QuestionEditForm />
+          <QuestionEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="secondary" onClick={handleEditClose}>

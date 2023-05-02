@@ -13,7 +13,7 @@ const TextField = styled(TextValidator)(() => ({
 
 const QuestionEditForm = (props) => {
   // const [state, setState] = useState({ date: new Date() });
-
+  const [open, setOpen] = useState(false);
   const [data, setdata] = useState({
     qtype: "",
     question: '',
@@ -28,6 +28,8 @@ const QuestionEditForm = (props) => {
     e.preventDefault();
     axios.post('http://localhost:9999/api/question', data).then((r) => {
       props.changeEdit(r.data._id);
+      setOpen(props.handleEditClose);
+
     });
     setdata((e.target.value = ''));
   };

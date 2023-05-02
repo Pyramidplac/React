@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TakenbyForm from './TakenbyForm';
 
-const TakenbyDialog = () => {
+const TakenbyDialog = (props) => {
     const [open, setOpen] = React.useState(false);
     const nav = useNavigate()
 
@@ -43,7 +43,7 @@ const TakenbyDialog = () => {
             >
 
                 <DialogContent>
-                    <TakenbyForm />
+                    <TakenbyForm changeEdit={props.changeEdit} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

@@ -11,8 +11,8 @@ const TextField = styled(TextValidator)(() => ({
     marginBottom: '16px',
 }));
 
-const FeesEditForm = () => {
-    // const [state, setState] = useState({ date: new Date() });
+const FeesEditForm = (props) => {
+    const [open, setOpen] = useState(false);
 
     const [data, setdata] = useState({
         feesmaster: '',
@@ -29,11 +29,12 @@ const FeesEditForm = () => {
         console.log(data);
         e.preventDefault();
         // --------------------------API----------------------------
-        axios.post('', data).then((r) => {
-            console.log(r.data);
-            toast('Registration successfully..');
+        axios.post('http://localhost:9999/api/fees', data).then((r) => {
+            props.changeEdit(r.data._id);
         });
         setdata((e.target.value = ''));
+        setOpen(props.handleEditClose);
+
     };
 
     // const handleDateChange = (date) => setState({ ...state, date });

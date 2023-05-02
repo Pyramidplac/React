@@ -44,7 +44,7 @@ const FeesDialog = (props) => {
             >
 
                 <DialogContent>
-                    <FeesForm changeEdit={props.changeEdit} />
+                    <FeesForm changeEdit={props.changeEdit} handleClose={handleClose} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

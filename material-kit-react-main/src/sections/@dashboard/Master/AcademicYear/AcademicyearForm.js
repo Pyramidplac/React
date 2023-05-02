@@ -12,7 +12,7 @@ const TextField = styled(TextValidator)(() => ({
 }));
 
 const AcademicyearForm = (props) => {
-  // const [state, setState] = useState({ date: new Date() });
+  const [open, setOpen] = useState(false);
 
   const [data, setdata] = useState({
     academicyear: '',
@@ -29,10 +29,11 @@ const AcademicyearForm = (props) => {
     e.preventDefault();
     // --------------------------API----------------------------
     axios.post('http://localhost:9999/api/academicyear', data).then((r) => {
-      console.log(r.data);
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
+    setOpen(props.handleClose);
+
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });

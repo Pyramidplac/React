@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import DialogTitle from '@mui/material/DialogTitle';
 import QuestiontypeForm from './QuestiontypeForm';
 
-const QuestiontypeDialog = () => {
+const QuestiontypeDialog = (props) => {
     const [open, setOpen] = React.useState(false);
     const nav = useNavigate()
 
@@ -44,7 +44,7 @@ const QuestiontypeDialog = () => {
             >
 
                 <DialogContent>
-                    <QuestiontypeForm />
+                    <QuestiontypeForm changeEdit={props.changeEdit} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

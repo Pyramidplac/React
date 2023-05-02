@@ -118,7 +118,7 @@ export default function FeesPackage() {
           onClose={handleEditClose}
           // fullScreen
           fullWidth
-          maxWidth="lg"
+          maxWidth="sm"
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
@@ -128,7 +128,7 @@ export default function FeesPackage() {
               Let Google help apps determine location. This means sending anonymous location data to Google, even when
               no apps are running.
             </DialogContentText>
-            <FeesEditForm />
+            <FeesEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
           </DialogContent>
           <DialogActions>
             <Button variant="outlined" color="secondary" onClick={handleEditClose}>

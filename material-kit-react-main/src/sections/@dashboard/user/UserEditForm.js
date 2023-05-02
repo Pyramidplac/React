@@ -51,8 +51,7 @@ const Course = [
 ];
 
 const UserEditForm = (props) => {
-    // const [state, setState] = useState({ date: new Date() });
-
+    const [open, setOpen] = useState(false);
     const [data, setdata] = useState({
         name: '',
         parentsname: '',
@@ -82,22 +81,7 @@ const UserEditForm = (props) => {
 
     const handleChange = (e) => {
         e.persist();
-        // setdata({ ...data, [e.target.name]: e.target.value });
-        if (e.target.name === 'course') {
-            const mydata = data.hobbies;
-
-            if (e.target.select) {
-                mydata.push(e.target.value);
-                setdata({ ...data, hobbies: mydata });
-            } else {
-                const mydata1 = mydata.filter((val) => {
-                    return val !== e.target.value;
-                });
-                setdata({ ...data, hobbies: mydata1 });
-            }
-        } else {
-            setdata({ ...data, [e.target.name]: e.target.value });
-        }
+        setdata({ ...data, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
@@ -105,7 +89,7 @@ const UserEditForm = (props) => {
         // --------------------------API----------------------------
         axios.post('http://localhost:9999/api/inquiry', data).then((r) => {
             props.changeEdit(r.data._id);
-
+            setOpen(props.handleEditClose);
         });
 
         setdata((e.target.value = ''));
@@ -197,7 +181,7 @@ const UserEditForm = (props) => {
                             errorMessages={['this field is required', 'email is not valid']}
                         />
                         <TextField
-                            type="text"
+                            type="number"
                             name="studentmobile"
                             value={data.studentmobile || ''}
                             label="Student Mobile Nubmer"
@@ -206,7 +190,7 @@ const UserEditForm = (props) => {
                             errorMessages={['this field is required']}
                         />
                         <TextField
-                            type="text"
+                            type="number"
                             name="parentmobile"
                             value={data.parentmobile || ''}
                             label="Parent Mobile Nubmer"
@@ -215,7 +199,7 @@ const UserEditForm = (props) => {
                             errorMessages={['this field is required']}
                         />
                         <TextField
-                            type="text"
+                            type="number"
                             name="whatsapp"
                             value={data.whatsapp || ''}
                             label="Whatsapp Nubmer"

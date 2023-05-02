@@ -12,7 +12,7 @@ const TextField = styled(TextValidator)(() => ({
 }));
 
 const CourseForm = (props) => {
-  // const [state, setState] = useState({ date: new Date() });
+  const [open, setOpen] = useState(false);
 
   const [data, setdata] = useState({
     course: '',
@@ -34,6 +34,8 @@ const CourseForm = (props) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
+    setOpen(props.handleClose);
+
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });

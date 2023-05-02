@@ -13,6 +13,7 @@ const TextField = styled(TextValidator)(() => ({
 
 const SubjectEditForm = (props) => {
     // const [state, setState] = useState({ date: new Date() });
+    const [open, setOpen] = useState(false);
 
     const [data, setdata] = useState({
         subject: '',
@@ -26,13 +27,15 @@ const SubjectEditForm = (props) => {
     };
 
     const handleSubmit = (e) => {
-        console.log(data);
         e.preventDefault();
         // --------------------------API----------------------------
-        axios.post('http://localhost:9999/api/fees', data).then((r) => {
+        axios.post('http://localhost:9999/api/subject', data).then((r) => {
             props.changeEdit(r.data._id);
+            setOpen(props.handleEditClose);
+
         });
         setdata((e.target.value = ''));
+
     };
 
     // const handleDateChange = (date) => setState({ ...state, date });

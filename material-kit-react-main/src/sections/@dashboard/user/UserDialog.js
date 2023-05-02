@@ -35,7 +35,7 @@ export default function UserDialog(props) {
       >
         <DialogTitle id="alert-dialog-title">{'Student/Trainee/Lead Info'}</DialogTitle>
         <DialogContent>
-          <UserForm changeEdit={props.changeEdit} />
+          <UserForm changeEdit={props.changeEdit} handleClose={handleClose} />
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="secondary" onClick={handleClose}>

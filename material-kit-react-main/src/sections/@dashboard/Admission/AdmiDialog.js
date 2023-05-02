@@ -35,7 +35,7 @@ export default function AdmiDialog(props) {
           <DialogTitle id="alert-dialog-title">{'Admission'}</DialogTitle>
         </DialogTitle>
         <DialogContent>
-          <AdmiForm changeEdit={props.changeEdit} />
+          <AdmiForm changeEdit={props.changeEdit} handleClose={handleClose} />
         </DialogContent>
         <DialogActions>
           <Button className="btn btn-outline-danger" onClick={handleClose}>

@@ -138,7 +138,7 @@ export default function Admission() {
               Let Google help apps determine location. This means sending anonymous location data to Google, even when
               no apps are running.
             </DialogContentText>
-            <AdmiEditForm />
+            <AdmiEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
           </DialogContent>
           <DialogActions>
             <Button variant="outlined" color="secondary" onClick={handleEditClose}>

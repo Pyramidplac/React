@@ -39,6 +39,8 @@ const Course = [
 ];
 
 const AdmiEditForm = (props) => {
+    const [open, setOpen] = useState(false);
+
     const [data, setdata] = useState({
         email: '',
         password: '',
@@ -75,10 +77,12 @@ const AdmiEditForm = (props) => {
         // --------------------------API----------------------------
 
         axios.post('http://localhost:9999/api/admission', data).then((r) => {
-            console.log(r.data);
             props.changeEdit(r.data._id);
+            setOpen(props.handleEditClose);
+
         });
         setdata((e.target.value = ''));
+
     };
 
     return (
@@ -240,7 +244,7 @@ const AdmiEditForm = (props) => {
                             <option>Counsellor Bhavnagar</option>
                         </TextField>
                         <TextField
-                            type="text"
+                            type="number"
                             name="rollNO"
                             id="standard-basic"
                             value={data.rollNO || ''}
@@ -250,7 +254,7 @@ const AdmiEditForm = (props) => {
                             validators={['required']}
                         />
                         <TextField
-                            type="text"
+                            type="number"
                             name="invoice"
                             id="standard-basic"
                             value={data.invoice || ''}

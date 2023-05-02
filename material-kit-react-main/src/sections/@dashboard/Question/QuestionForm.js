@@ -13,7 +13,7 @@ const TextField = styled(TextValidator)(() => ({
 
 const QuestionForm = (props) => {
   // const [state, setState] = useState({ date: new Date() });
-
+  const [open, setOpen] = useState(false);
   const [data, setdata] = useState({
     qtype: "",
     question: '',
@@ -30,6 +30,7 @@ const QuestionForm = (props) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
+    setOpen(props.handleClose);
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });

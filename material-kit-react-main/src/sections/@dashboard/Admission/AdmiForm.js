@@ -39,6 +39,8 @@ const Course = [
 ];
 
 const AdmiForm = (props) => {
+  const [open, setOpen] = useState(false);
+
   const [data, setdata] = useState({
     email: '',
     password: '',
@@ -79,6 +81,7 @@ const AdmiForm = (props) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
+    setOpen(props.handleClose);
   };
 
   return (
@@ -240,7 +243,7 @@ const AdmiForm = (props) => {
               <option>Counsellor Bhavnagar</option>
             </TextField>
             <TextField
-              type="text"
+              type="number"
               name="rollNO"
               id="standard-basic"
               value={data.rollNO || ''}
@@ -250,7 +253,7 @@ const AdmiForm = (props) => {
               validators={['required']}
             />
             <TextField
-              type="text"
+              type="number"
               name="invoice"
               id="standard-basic"
               value={data.invoice || ''}

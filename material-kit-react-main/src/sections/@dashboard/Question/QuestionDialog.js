@@ -38,7 +38,7 @@ export default function QuestionDialog(props) {
             Let Google help apps determine location. This means sending anonymous location data to Google, even when no
             apps are running.
           </DialogContentText>
-          <QuestionForm changeEdit={props.changeEdit} />
+          <QuestionForm changeEdit={props.changeEdit} handleClose={handleClose} />
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="secondary" onClick={handleClose}>

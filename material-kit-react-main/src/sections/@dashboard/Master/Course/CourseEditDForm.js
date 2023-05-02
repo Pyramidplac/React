@@ -12,7 +12,7 @@ const TextField = styled(TextValidator)(() => ({
 }));
 
 const CourseEditForm = (props) => {
-    // const [state, setState] = useState({ date: new Date() });
+    const [open, setOpen] = useState(false);
 
     const [data, setdata] = useState({
         course: '',
@@ -32,6 +32,8 @@ const CourseEditForm = (props) => {
         axios.post('http://localhost:9999/api/course', data).then((r) => {
             console.log(r.data);
             props.changeEdit(r.data._id);
+            setOpen(props.handleEditClose);
+
         });
         setdata((e.target.value = ''));
     };

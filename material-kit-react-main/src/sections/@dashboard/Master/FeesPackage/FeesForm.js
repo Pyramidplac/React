@@ -14,7 +14,7 @@ const TextField = styled(TextValidator)(() => ({
 }));
 
 const FeesForm = (props) => {
-  // const [state, setState] = useState({ date: new Date() });
+  const [open, setOpen] = useState(false);
   // const [course, setcourse] = useState([]);
   const [data, setdata] = useState({
     feesmaster: '',
@@ -35,6 +35,8 @@ const FeesForm = (props) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
+    setOpen(props.handleClose);
+
   };
 
   // useEffect(() => {

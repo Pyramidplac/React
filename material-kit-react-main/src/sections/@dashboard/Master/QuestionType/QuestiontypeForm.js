@@ -11,7 +11,7 @@ const TextField = styled(TextValidator)(() => ({
   marginBottom: '16px',
 }));
 
-const QuestiontypeForm = () => {
+const QuestiontypeForm = (props) => {
   // const [state, setState] = useState({ date: new Date() });
 
   const [data, setdata] = useState({
@@ -24,12 +24,10 @@ const QuestiontypeForm = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('', data).then((r) => {
-      console.log(r.data);
-      toast('Registration successfully..');
+    axios.post('http://localhost:9999/api/questiontype', data).then((r) => {
+      props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
   };
