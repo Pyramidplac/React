@@ -43,7 +43,7 @@ const TakenbyDialog = (props) => {
             >
 
                 <DialogContent>
-                    <TakenbyForm changeEdit={props.changeEdit} />
+                    <TakenbyForm changeEdit={props.changeEdit} handleClose={handleClose} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

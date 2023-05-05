@@ -25,6 +25,7 @@ import {
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import QuestiontypeDialog from '../sections/@dashboard/Master/QuestionType/QuestiontypeDialog';
+import QuestiontypeEditForm from '../sections/@dashboard/Master/QuestionType/QuestiontypeEditForm';
 
 export default function Questiontype() {
   const [rows, setRows] = React.useState('');
@@ -100,6 +101,26 @@ export default function Questiontype() {
           </Typography>
           <QuestiontypeDialog changeEdit={setEdit} />
         </Stack>
+        <Dialog
+          open={open}
+          onClose={handleEditClose}
+          // fullScreen
+          fullWidth
+          maxWidth="sm"
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogContent>
+
+            <QuestiontypeEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
+          </DialogContent>
+          <DialogActions>
+            <Button variant="outlined" color="secondary" onClick={handleEditClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Card
           style={{ height: 500, width: '100%', backgroundColor: '#ffffff' }}
           sx={{ boxShadow: 3, borderRadius: '16px' }}

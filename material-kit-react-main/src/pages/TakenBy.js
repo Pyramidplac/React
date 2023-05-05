@@ -26,6 +26,8 @@ import {
 import { DataGrid } from '@mui/x-data-grid';
 
 import TakenbyDialog from '../sections/@dashboard/Master/TakenBy/TakenbyDialog';
+import TakenbyEditForm from '../sections/@dashboard/Master/TakenBy/TakenbyEditForm';
+
 
 export default function TakenBy() {
   const [rows, setRows] = React.useState('');
@@ -106,6 +108,26 @@ export default function TakenBy() {
           </Typography>
           <TakenbyDialog changeEdit={setEdit} />
         </Stack>
+        <Dialog
+          open={open}
+          onClose={handleEditClose}
+          // fullScreen
+          fullWidth
+          maxWidth="sm"
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogContent>
+
+            <TakenbyEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
+          </DialogContent>
+          <DialogActions>
+            <Button variant="outlined" color="secondary" onClick={handleEditClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Card
           style={{ height: 500, width: '100%', backgroundColor: '#ffffff' }}
           sx={{ boxShadow: 3, borderRadius: '16px' }}

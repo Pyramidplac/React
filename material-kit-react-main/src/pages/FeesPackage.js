@@ -1,17 +1,11 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Close';
 import axios from 'axios';
-import { GridRowModes, DataGridPro, GridToolbarContainer, GridActionsCellItem } from '@mui/x-data-grid-pro';
-import { randomCreatedDate, randomTraderName, randomUpdatedDate, randomId } from '@mui/x-data-grid-generator';
+import { GridActionsCellItem } from '@mui/x-data-grid-pro';
 import {
   Card,
   Container,
@@ -124,10 +118,6 @@ export default function FeesPackage() {
         >
           <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous location data to Google, even when
-              no apps are running.
-            </DialogContentText>
             <FeesEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
           </DialogContent>
           <DialogActions>

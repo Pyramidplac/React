@@ -12,7 +12,7 @@ const TextField = styled(TextValidator)(() => ({
 }));
 
 const TakenbyForm = (props) => {
-  // const [state, setState] = useState({ date: new Date() });
+  const [open, setOpen] = useState(false);
 
   const [data, setdata] = useState({
     takenby: '',
@@ -30,6 +30,8 @@ const TakenbyForm = (props) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
+    setOpen(props.handleClose);
+
   };
 
   // const handleDateChange = (date) => setState({ ...state, date });

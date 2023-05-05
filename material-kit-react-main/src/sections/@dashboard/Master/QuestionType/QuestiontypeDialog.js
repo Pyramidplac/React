@@ -44,7 +44,7 @@ const QuestiontypeDialog = (props) => {
             >
 
                 <DialogContent>
-                    <QuestiontypeForm changeEdit={props.changeEdit} />
+                    <QuestiontypeForm changeEdit={props.changeEdit} handleClose={handleClose} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

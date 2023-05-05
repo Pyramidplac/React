@@ -59,21 +59,7 @@ export default function Subject() {
       }
     });
   };
-  const handleDeleteClick2 = (row) => () => {
-    Swal.fire({
-      title: 'Do you want to Delete?',
-      showCancelButton: true,
-      confirmButtonText: 'Delete',
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
 
-        axios.delete(`http://localhost:9999/api/subject`).then((r) => {
-          setRows(rows.filter((rowd) => rowd.id !== row.id));
-        });
-      }
-    });
-  };
 
 
   const columns = [
@@ -135,10 +121,7 @@ export default function Subject() {
         >
           <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous location data to Google, even when
-              no apps are running.
-            </DialogContentText>
+
             <SubjectEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
           </DialogContent>
           <DialogActions>

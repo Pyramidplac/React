@@ -38,7 +38,7 @@ const TextField = styled(TextValidator)(() => ({
     marginBottom: '16px',
 }));
 
-const FacultyregistrationForm = (props) => {
+const FacultyregistrationEditForm = (props) => {
     const [open, setOpen] = useState(false);
 
     const [data, setdata] = useState({
@@ -52,7 +52,6 @@ const FacultyregistrationForm = (props) => {
     useEffect(() => {
         ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
             if (value !== data.password) return false;
-
             return true;
         });
         return () => ValidatorForm.removeValidationRule('isPasswordMatch');
@@ -68,10 +67,10 @@ const FacultyregistrationForm = (props) => {
         e.preventDefault();
         // --------------------------API----------------------------
         axios.post('', data).then((r) => {
+            console.log(r.data);
+            setOpen(props.handleEditClose);
         });
         setdata((e.target.value = ''));
-        setOpen(props.handleClose);
-
     };
 
     // const handleDateChange = (date) => setState({ ...state, date });
@@ -179,4 +178,4 @@ const FacultyregistrationForm = (props) => {
     );
 };
 
-export default FacultyregistrationForm;
+export default FacultyregistrationEditForm;

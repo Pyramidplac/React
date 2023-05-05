@@ -9,7 +9,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DialogTitle from '@mui/material/DialogTitle';
 import FacultyregistrationForm from './FacultyregistrationForm';
 
-const FacultyregiDialog = () => {
+const FacultyregiDialog = (props) => {
     const [open, setOpen] = React.useState(false);
     const nav = useNavigate();
 
@@ -43,7 +43,7 @@ const FacultyregiDialog = () => {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogContent>
-                    <FacultyregistrationForm />
+                    <FacultyregistrationForm changeEdit={props.changeEdit} handleClose={handleClose} />
                 </DialogContent>
                 <DialogActions>
                     <Button className="btn btn-outline-danger" onClick={handleClose}>

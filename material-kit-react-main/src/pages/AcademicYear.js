@@ -43,9 +43,6 @@ export default function AcademicYear() {
   };
   // ========================================================
 
-  const handleSaveClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-  };
 
   const handleDeleteClick = (row) => () => {
     Swal.fire({
@@ -63,17 +60,7 @@ export default function AcademicYear() {
     });
   };
 
-  const handleCancelClick = (id) => () => {
-    setRowModesModel({
-      ...rowModesModel,
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
-    });
 
-    const editedRow = rows.find((row) => row.id === id);
-    if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.id !== id));
-    }
-  };
   const columns = [
     { field: 'academicyear', headerName: 'Academic Year', width: 300 },
     { field: 'academicyearfromdate', headerName: 'Year Start Date', width: 300 },
@@ -135,10 +122,7 @@ export default function AcademicYear() {
         >
           <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous location data to Google, even when
-              no apps are running.
-            </DialogContentText>
+
             <AcademicYearEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
           </DialogContent>
           <DialogActions>
