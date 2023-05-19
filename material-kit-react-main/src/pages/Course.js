@@ -53,7 +53,7 @@ export default function Course() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        axios.delete(`http://localhost:9999/api/course/${row.row._id}`).then((r) => {
+        axios.delete(`https://desert-sand-reindeer-wrap.cyclic.app/api/course/${row.row._id}`).then((r) => {
           setRows(rows.filter((rowd) => rowd.id !== row.id));
         });
       }
@@ -89,7 +89,7 @@ export default function Course() {
   ];
 
   useEffect(() => {
-    axios.get('http://localhost:9999/api/course').then((r) => {
+    axios.get('https://desert-sand-reindeer-wrap.cyclic.app/api/course').then((r) => {
       const d = r.data.map((value, index) => {
         value.id = index + 1;
         return value;
@@ -120,7 +120,7 @@ export default function Course() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{'Course'}</DialogTitle>
           <DialogContent>
             <CourseEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
           </DialogContent>

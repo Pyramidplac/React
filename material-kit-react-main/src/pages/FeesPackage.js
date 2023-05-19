@@ -50,7 +50,7 @@ export default function FeesPackage() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        axios.delete(`http://localhost:9999/api/fees/${row.row._id}`).then((r) => {
+        axios.delete(`https://desert-sand-reindeer-wrap.cyclic.app/api/fees/${row.row._id}`).then((r) => {
           setRows(rows.filter((rowd) => rowd.id !== row.id));
         });
       }
@@ -85,7 +85,7 @@ export default function FeesPackage() {
   ];
 
   useEffect(() => {
-    axios.get('http://localhost:9999/api/fees').then((r) => {
+    axios.get('https://desert-sand-reindeer-wrap.cyclic.app/api/fees').then((r) => {
       const d = r.data.map((value, index) => {
         value.id = index + 1;
         return value;
@@ -116,7 +116,7 @@ export default function FeesPackage() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{'Fees Package'}</DialogTitle>
           <DialogContent>
             <FeesEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
           </DialogContent>

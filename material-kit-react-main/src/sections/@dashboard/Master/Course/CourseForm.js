@@ -29,7 +29,7 @@ const CourseForm = (props) => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('http://localhost:9999/api/course', data).then((r) => {
+    axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/course', data).then((r) => {
       console.log(r.data);
       props.changeEdit(r.data._id);
     });

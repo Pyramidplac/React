@@ -59,15 +59,29 @@ const FacultyregistrationEditForm = (props) => {
 
     const handleChange = (e) => {
         e.persist();
-        setdata({ ...data, [e.target.name]: e.target.value });
+        // setdata({ ...data, [e.target.name]: e.target.value });
+        if (e.target.name === 'course') {
+            const mydata = data.hobbies;
+
+            if (e.target.select) {
+                mydata.push(e.target.value);
+                setdata({ ...data, hobbies: mydata });
+            } else {
+                const mydata1 = mydata.filter((val) => {
+                    return val !== e.target.value;
+                });
+                setdata({ ...data, hobbies: mydata1 });
+            }
+        } else {
+            setdata({ ...data, [e.target.name]: e.target.value });
+        }
     };
 
     const handleSubmit = (e) => {
-        console.log(data);
         e.preventDefault();
         // --------------------------API----------------------------
-        axios.post('', data).then((r) => {
-            console.log(r.data);
+        axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/facultyregistration', data).then((r) => {
+            props.changeEdit(r.data._id);
             setOpen(props.handleEditClose);
         });
         setdata((e.target.value = ''));
@@ -143,7 +157,7 @@ const FacultyregistrationEditForm = (props) => {
                                     {selected ? <CheckIcon color="info" /> : null}
                                 </MenuItem>
                             )}
-                            onChange={handleChange}
+                            onChange={(event, value) => setdata({ ...data, course: value })} // prints the selected value
                             renderInput={(params) => <TextField {...params} variant="outlined" />}
                         />
                     </Grid>

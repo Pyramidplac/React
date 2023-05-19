@@ -30,7 +30,7 @@ const SubjectDialog = (props) => {
     //         /* Read more about isConfirmed, isDenied below */
     //         if (result.isConfirmed) {
 
-    //             axios.delete('http://localhost:9999/api/subject').then((r) => {
+    //             axios.delete('https://desert-sand-reindeer-wrap.cyclic.app/api/subject').then((r) => {
 
     //             });
     //         }

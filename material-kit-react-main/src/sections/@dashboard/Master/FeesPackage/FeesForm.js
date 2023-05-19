@@ -31,7 +31,7 @@ const FeesForm = (props) => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('http://localhost:9999/api/fees', data).then((r) => {
+    axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/fees', data).then((r) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));
@@ -40,7 +40,7 @@ const FeesForm = (props) => {
   };
 
   // useEffect(() => {
-  //   axios.get('http://localhost:9999/api/course').then((r) => {
+  //   axios.get('https://desert-sand-reindeer-wrap.cyclic.app/api/course').then((r) => {
   //     const d = r.data.map((value, index) => {
   //       value.id = index + 1;
   //       return value;

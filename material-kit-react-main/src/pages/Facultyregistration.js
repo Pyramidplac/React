@@ -47,7 +47,7 @@ export default function Facultyregistration() {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:9999/api/fees/${row.row._id}`).then((r) => {
+                axios.delete(`https://desert-sand-reindeer-wrap.cyclic.app/api/facultyregistration/${row.row._id}`).then((r) => {
                     setRows(rows.filter((rowd) => rowd.id !== row.id));
                 });
             }
@@ -57,9 +57,10 @@ export default function Facultyregistration() {
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 10 },
-        { field: 'name', headerName: 'Subject', width: 350 },
-        { field: 'username', headerName: 'Timeline', width: 350 },
+
+        { field: 'name', headerName: 'Name', width: 200 },
+        { field: 'course', headerName: 'Course', width: 350 },
+        { field: 'email', headerName: 'Email', width: 350 },
         {
             field: 'actions',
             type: 'actions',
@@ -85,7 +86,7 @@ export default function Facultyregistration() {
 
 
     useEffect(() => {
-        axios.get('').then((r) => {
+        axios.get('https://desert-sand-reindeer-wrap.cyclic.app/api/facultyregistration').then((r) => {
             const d = r.data.map((value, index) => {
                 value.id = index + 1;
                 return value;
@@ -93,6 +94,7 @@ export default function Facultyregistration() {
             setRows(d);
         });
     }, [edit]);
+
 
     return (
         <>
@@ -103,7 +105,7 @@ export default function Facultyregistration() {
                     <Typography variant="h4" gutterBottom>
                         Faculty Registration Form
                     </Typography>
-                    <FacultyregiDialog />
+                    <FacultyregiDialog changeEdit={setEdit} />
                 </Stack>
                 <Dialog
                     open={open}
@@ -114,7 +116,7 @@ export default function Facultyregistration() {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{'Faculty Registration'}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
                             Let Google help apps determine location. This means sending anonymous location data to Google, even when

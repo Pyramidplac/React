@@ -102,7 +102,7 @@ const UserForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('http://localhost:9999/api/inquiry', data).then((r) => {
+    axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/inquiry', data).then((r) => {
       console.log('Registration successfully..');
       props.changeEdit(r.data._id);
       setOpen(props.handleClose);

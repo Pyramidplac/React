@@ -59,7 +59,7 @@ export default function Admission() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        axios.delete(`http://localhost:9999/api/admission/${row.row._id}`).then((r) => {
+        axios.delete(`https://desert-sand-reindeer-wrap.cyclic.app/api/admission/${row.row._id}`).then((r) => {
           setRows(rows.filter((rowd) => rowd.id !== row.id));
         });
       }
@@ -101,7 +101,7 @@ export default function Admission() {
     },
   ];
   useEffect(() => {
-    axios.get('http://localhost:9999/api/admission').then((r) => {
+    axios.get('https://desert-sand-reindeer-wrap.cyclic.app/api/admission').then((r) => {
       const d = r.data.map((value, index) => {
         value.id = index + 1;
         return value;
@@ -132,7 +132,7 @@ export default function Admission() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{'Admission'}</DialogTitle>
           <DialogContent>
 
             <AdmiEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />

@@ -29,7 +29,7 @@ const SubjectEditForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // --------------------------API----------------------------
-        axios.post('http://localhost:9999/api/subject', data).then((r) => {
+        axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/subject', data).then((r) => {
             props.changeEdit(r.data._id);
             setOpen(props.handleEditClose);
 

@@ -26,7 +26,7 @@ const TakenbyForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('http://localhost:9999/api/takenBy', data).then((r) => {
+    axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/takenBy', data).then((r) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));

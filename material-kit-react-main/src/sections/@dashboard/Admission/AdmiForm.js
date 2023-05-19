@@ -76,7 +76,7 @@ const AdmiForm = (props) => {
     e.preventDefault();
     // --------------------------API----------------------------
 
-    axios.post('http://localhost:9999/api/admission', data).then((r) => {
+    axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/admission', data).then((r) => {
       console.log(r.data);
       props.changeEdit(r.data._id);
     });

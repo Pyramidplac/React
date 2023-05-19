@@ -53,7 +53,7 @@ export default function Questionpage() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        axios.delete(`http://localhost:9999/api/question/${row.row._id}`).then((r) => {
+        axios.delete(`https://desert-sand-reindeer-wrap.cyclic.app/api/question/${row.row._id}`).then((r) => {
           setRows(rows.filter((rowd) => rowd.id !== row.id));
         });
       }
@@ -91,7 +91,7 @@ export default function Questionpage() {
 
 
   useEffect(() => {
-    axios.get('http://localhost:9999/api/question').then((r) => {
+    axios.get('https://desert-sand-reindeer-wrap.cyclic.app/api/question').then((r) => {
       const d = r.data.map((value, index) => {
         value.id = index + 1;
         return value;

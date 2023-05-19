@@ -26,7 +26,7 @@ const QuestionForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:9999/api/question', data).then((r) => {
+    axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/question', data).then((r) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));

@@ -25,7 +25,7 @@ const OnlineInquiry = () => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        axios.delete(`http://localhost:9999/api/onlineinquiry/${row.row._id}`).then((r) => {
+        axios.delete(`https://desert-sand-reindeer-wrap.cyclic.app/api/onlineinquiry/${row.row._id}`).then((r) => {
           setRows(rows.filter((rowd) => rowd.id !== row.id));
         });
       }
@@ -55,7 +55,7 @@ const OnlineInquiry = () => {
   ];
 
   useEffect(() => {
-    axios.get('http://localhost:9999/api/onlineinquiry').then((r) => {
+    axios.get('https://desert-sand-reindeer-wrap.cyclic.app/api/onlineinquiry').then((r) => {
       const d = r.data.map((value, index) => {
         value.id = index + 1;
         return value;

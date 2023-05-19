@@ -28,7 +28,7 @@ const AcademicyearForm = (props) => {
     console.log(data);
     e.preventDefault();
     // --------------------------API----------------------------
-    axios.post('http://localhost:9999/api/academicyear', data).then((r) => {
+    axios.post('https://desert-sand-reindeer-wrap.cyclic.app/api/academicyear', data).then((r) => {
       props.changeEdit(r.data._id);
     });
     setdata((e.target.value = ''));

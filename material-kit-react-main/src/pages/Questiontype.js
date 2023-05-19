@@ -50,7 +50,7 @@ export default function Questiontype() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        axios.delete(`http://localhost:9999/api/questiontype/${row.row._id}`).then((r) => {
+        axios.delete(`https://desert-sand-reindeer-wrap.cyclic.app/api/questiontype/${row.row._id}`).then((r) => {
           setRows(rows.filter((rowd) => rowd.id !== row.id));
         });
       }
@@ -81,7 +81,7 @@ export default function Questiontype() {
     },
   ];
   useEffect(() => {
-    axios.get('http://localhost:9999/api/questiontype').then((r) => {
+    axios.get('https://desert-sand-reindeer-wrap.cyclic.app/api/questiontype').then((r) => {
       const d = r.data.map((value, index) => {
         value.id = index + 1;
         return value;
@@ -110,7 +110,7 @@ export default function Questiontype() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{'Question & Answer'}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{'Question Type'}</DialogTitle>
           <DialogContent>
 
             <QuestiontypeEditForm changeEdit={setEdit} handleEditClose={handleEditClose} />
